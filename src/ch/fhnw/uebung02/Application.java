@@ -15,7 +15,7 @@ public class Application extends GLBase1 {
     float near = -10, far = 1000;
     FPSAnimator anim;
 
-    Car actor = new Car(0.5f, 1f, 0f);
+    Car actor = new Car(0.5f, 1f, 0.5f);
     //  ---------  Methoden  ----------------------------------
 
     public void drawCar(GL3 gl, Car car) {
@@ -30,25 +30,44 @@ public class Application extends GLBase1 {
 
         rewindBuffer(gl);
         float y1 = car.h / 2 + car.h * 0.1f;
-        float y2 = car.h / 2 + car.h * 0.1f + car.h * 0.4f;
-        putVertex(0 - car.w * 0.1f, y1, 0);
-        putVertex(0 + car.w * 0.2f, y1, 0);
-        putVertex(0 + car.w * 0.2f, y2, 0);
-        putVertex(0 - car.w * 0.1f, y2, 0);
+        float y2 = car.h / 2 + car.h * 0.1f + car.tyreH;
+        putVertex(0 - car.tyreW/2, y1, 0);
+        putVertex(0 + car.tyreW/2, y1, 0);
+        putVertex(0 + car.tyreW/2, y2, 0);
+        putVertex(0 - car.tyreW/2, y2, 0);
         copyBuffer(gl, 4);
         gl.glDrawArrays(GL3.GL_LINE_LOOP, 0, nVertices);
 
         rewindBuffer(gl);
-        putVertex(0 - car.w * 0.1f, -y1, 0);
-        putVertex(0 + car.w * 0.2f, -y1, 0);
-        putVertex(0 + car.w * 0.2f, -y2, 0);
-        putVertex(0 - car.w * 0.1f, -y2, 0);
+        putVertex(0 - car.tyreW/2, -y1, 0);
+        putVertex(0 + car.tyreW/2, -y1, 0);
+        putVertex(0 + car.tyreW/2, -y2, 0);
+        putVertex(0 - car.tyreW/2, -y2, 0);
         copyBuffer(gl, 4);
         gl.glDrawArrays(GL3.GL_LINE_LOOP, 0, nVertices);
     }
 
-    public void drawTyre(GL3 gl, float x, float y, Car car) {
+    public void drawTyre(GL3 gl, Car car) {
+        rewindBuffer(gl);
+        putVertex(-car.tyreW / 2, -car.tyreH / 2, 0);
+        putVertex(-car.tyreW / 2, car.tyreH / 2, 0);
+        putVertex(car.tyreW / 2, car.tyreH / 2, 0);
+        putVertex(car.tyreW/2, -car.tyreH/2, 0);
+        copyBuffer(gl, 4);
+        gl.glDrawArrays(GL3.GL_LINE_LOOP, 0, 4);
+    }
 
+    public void drawFrontAxis(GL3 gl, Car car, float ym) {
+        pushMatrix(gl);
+        translate(gl, car.w, car.h / 2 + car.h * 0.1f + car.tyreH / 2, 0);
+        rotate(gl, (float) Math.toDegrees(car.alpha), 0, 0, 1);
+        drawTyre(gl, car);
+        popMatrix(gl);
+        pushMatrix(gl);
+        translate(gl, car.w, -(car.h / 2 + car.h * 0.1f + car.tyreH / 2), 0);
+        float beta = (float)Math.atan(car.w/(ym + car.h/2));
+        rotate(gl, (float) Math.toDegrees(beta), 0, 0, 1);
+        drawTyre(gl, car);
     }
 
     //  ----------  OpenGL-Events   ---------------------------
@@ -71,10 +90,12 @@ public class Application extends GLBase1 {
         loadIdentity(gl);
         setColor(1, 1, 1);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
-        rotate(gl, actor.alpha++, 0, 0, 1);
-        translate(gl, 0, -2, 0);
+        rotate(gl, actor.delta++, 0, 0, 1);
+        float ym = actor.h/2 + (float)(actor.w/Math.tan(actor.alpha));
+        translate(gl, 0, -ym, 0);
         setColor(1, 0, 0);
         drawCar(gl, actor);
+        drawFrontAxis(gl, actor, ym);
     }
 
 
