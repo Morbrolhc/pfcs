@@ -5,17 +5,18 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.media.opengl.GL3;
 import javax.media.opengl.GLAutoDrawable;
+import java.awt.event.KeyEvent;
 
 public class Application extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
-    float left = -4, right = 4;             // ViewingVolume
+    float left = -20, right = 20;             // ViewingVolume
     float bottom, top;
     float near = -10, far = 1000;
     FPSAnimator anim;
 
-    Car actor = new Car(0.5f, 1f, 0.5f);
+    Car actor = new Car(2f, 4f, 0f);
     //  ---------  Methoden  ----------------------------------
 
     public void drawCar(GL3 gl, Car car) {
@@ -45,6 +46,8 @@ public class Application extends GLBase1 {
         putVertex(0 - car.tyreW/2, -y2, 0);
         copyBuffer(gl, 4);
         gl.glDrawArrays(GL3.GL_LINE_LOOP, 0, nVertices);
+
+        drawFrontAxis(gl, car);
     }
 
     public void drawTyre(GL3 gl, Car car) {
@@ -57,7 +60,7 @@ public class Application extends GLBase1 {
         gl.glDrawArrays(GL3.GL_LINE_LOOP, 0, 4);
     }
 
-    public void drawFrontAxis(GL3 gl, Car car, float ym) {
+    public void drawFrontAxis(GL3 gl, Car car) {
         pushMatrix(gl);
         translate(gl, car.w, car.h / 2 + car.h * 0.1f + car.tyreH / 2, 0);
         rotate(gl, (float) Math.toDegrees(car.alpha), 0, 0, 1);
@@ -65,9 +68,20 @@ public class Application extends GLBase1 {
         popMatrix(gl);
         pushMatrix(gl);
         translate(gl, car.w, -(car.h / 2 + car.h * 0.1f + car.tyreH / 2), 0);
-        float beta = (float)Math.atan(car.w/(ym + car.h/2));
-        rotate(gl, (float) Math.toDegrees(beta), 0, 0, 1);
+        rotate(gl, (float) Math.toDegrees(car.beta), 0, 0, 1);
         drawTyre(gl, car);
+        popMatrix(gl);
+    }
+
+    public void moveCar(GL3 gl, Car car) {
+        if(car.alpha <= 0.05 && car.alpha >= -0.05) {
+            translate(gl, car.v*0.17f, 0, 0);
+        }
+        else {
+            translate(gl, 0, car.ym, 0);
+            rotate(gl, (car.v*0.17f*180f) / (car.ym*(float)Math.PI), 0, 0, 1);
+            translate(gl, 0, -car.ym, 0);
+        }
     }
 
     //  ----------  OpenGL-Events   ---------------------------
@@ -87,15 +101,14 @@ public class Application extends GLBase1 {
     public void display(GLAutoDrawable drawable) {
         GL3 gl = drawable.getGL().getGL3();
         gl.glClear(GL3.GL_COLOR_BUFFER_BIT);
+        pushMatrix(gl);
         loadIdentity(gl);
         setColor(1, 1, 1);
-        drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
-        rotate(gl, actor.delta++, 0, 0, 1);
-        float ym = actor.h/2 + (float)(actor.w/Math.tan(actor.alpha));
-        translate(gl, 0, -ym, 0);
+        drawAxis(gl, 8, 8, 8);
+        popMatrix(gl);//  Koordinatenachsen
         setColor(1, 0, 0);
         drawCar(gl, actor);
-        drawFrontAxis(gl, actor, ym);
+        moveCar(gl, actor);
     }
 
 
@@ -119,4 +132,22 @@ public class Application extends GLBase1 {
         new Application();
     }
 
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        switch(code) {
+            case KeyEvent.VK_W:
+                actor.v+=0.2f;
+                break;
+            case KeyEvent.VK_A:
+                actor.setAlpha(actor.alpha+0.04f);
+                break;
+            case KeyEvent.VK_D:
+                actor.setAlpha(actor.alpha-0.04f);
+                break;
+            case KeyEvent.VK_S:
+                actor.v-=0.2f;
+                break;
+        }
+    }
 }

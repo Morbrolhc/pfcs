@@ -1,14 +1,19 @@
 package ch.fhnw.glbase;//  -------------   JOGL 3D-Programm  -------------------
 import javax.media.opengl.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class MyFirst3D extends GLBase1
-{
+public class MyFirst3D extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
     float left=-5, right=5;
     float bottom, top;
     float near=-10, far=1000;
+
+    float dCam = 10;                 // Abstand vom absoluten Nullpunkt
+    float elevation = 10;            // Orientierung
+    float azimut = 20;
 
 
     //  ---------  Methoden  ----------------------------------
@@ -41,9 +46,7 @@ public class MyFirst3D extends GLBase1
       gl.glClear(GL3.GL_COLOR_BUFFER_BIT | GL3.GL_DEPTH_BUFFER_BIT);
 
       // ------  Kamera-System  -------
-      float dCam = 10;                 // Abstand vom absoluten Nullpunkt
-      float elevation = 10;            // Orientierung
-      float azimut = 20;
+
       setCameraSystem(gl, dCam, elevation, azimut);
       setColor(0.8f, 0.8f, 0.8f);
       drawAxis(gl, 8,8,8);             //  Koordinatenachsen
@@ -75,4 +78,10 @@ public class MyFirst3D extends GLBase1
     { new MyFirst3D();
     }
 
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        azimut++;
+        canvas.display();
+    }
 }

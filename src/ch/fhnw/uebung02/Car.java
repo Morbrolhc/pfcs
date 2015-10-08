@@ -4,14 +4,26 @@ package ch.fhnw.uebung02;
  * Created by joel on 05.10.15.
  */
 public class Car {
-    float h, w, alpha, delta = 0;
+    float h, w, alpha, beta;
     float tyreH, tyreW;
+    float ym, v = 0;
 
     public Car(float h, float w, float alpha){
         this.h = h;
         this.w = w;
-        this.alpha = alpha;
+        setAlpha(alpha);
         tyreH = h/4;
         tyreW = w/4;
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+//        if(alpha > 0) {
+            ym = h / 2 + (float) (w / Math.tan(alpha));
+            beta = (float) Math.atan(w / (ym + h / 2));
+//        } else {
+//            ym = (float) (w / Math.tan(alpha)) - h / 2;
+//            beta = (float) Math.atan(w / (ym - h / 2));
+//        }
     }
 }
