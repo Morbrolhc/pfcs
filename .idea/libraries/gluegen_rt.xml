@@ -3,8 +3,14 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/gluegen-rt.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jogl-all.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gluegen-rt-natives-linux-amd64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jogl-all-natives-linux-amd64.jar!/" />
     </CLASSES>
     <JAVADOC />
+    <NATIVE>
+      <root url="jar://$PROJECT_DIR$/lib/gluegen-rt-natives-linux-amd64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jogl-all-natives-linux-amd64.jar!/" />
+    </NATIVE>
     <SOURCES />
   </library>
 </component>

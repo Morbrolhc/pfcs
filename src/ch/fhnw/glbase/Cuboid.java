@@ -1,0 +1,89 @@
+package ch.fhnw.glbase;
+
+import ch.fhnw.util.math.Vec3;
+
+import javax.media.opengl.GL3;
+
+/**
+ * Created by joel on 14.10.15.
+ */
+public class Cuboid {
+
+    private float a;
+    private float b;
+    private float c;
+
+    private MyRenderer1 renderer;
+
+    public Cuboid(MyRenderer1 renderer, float a, float b, float c){
+        this.renderer = renderer;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public void draw(GL3 gl){
+        float a2 = a*0.5f, b2 = b*0.5f, c2 = c*0.5f;
+        Vec3 A = new Vec3(a2, -b2, c2);
+        Vec3 B = new Vec3(a2, -b2, -c2);
+        Vec3 C = new Vec3(-a2, -b2, -c2);
+        Vec3 D = new Vec3(-a2, -b2, c2);
+        Vec3 E = new Vec3(a2, b2, c2);
+        Vec3 F = new Vec3(a2, b2, -c2);
+        Vec3 G = new Vec3(-a2, b2, -c2);
+        Vec3 H = new Vec3(-a2, b2, c2);
+        renderer.setColor(0.2f, 0.2f, 0);
+        putRectangle(D, C, B, A);
+        renderer.setColor(0.8f, 0.8f, 0);
+        putRectangle(E, F, G, H);
+        renderer.setColor(0.3f, 0.3f, 0);
+        putRectangle(A, B, F, E);
+        renderer.setColor(0.4f, 0.4f, 0);
+        putRectangle(D, A, E, H);
+        renderer.setColor(0.5f, 0.5f, 0);
+        putRectangle(D, H, G, C);
+        renderer.setColor(0.6f, 0.6f, 0);
+        putRectangle(B, C, G, F);
+        renderer.rewindBuffer(gl);
+        renderer.copyBuffer(gl, 36);
+        gl.glDrawArrays(GL3.GL_TRIANGLES, 0, 36);
+    }
+
+    private void putRectangle(Vec3 A, Vec3 B, Vec3 C, Vec3 D){
+        renderer.putVertex(A.x, A.y, A.z);
+        renderer.putVertex(B.x, B.y, B.z);
+        renderer.putVertex(C.x, C.y, C.z);
+        renderer.putVertex(A.x, A.y, A.z);
+        renderer.putVertex(C.x, C.y, C.z);
+        renderer.putVertex(D.x, D.y, D.z);
+    }
+
+
+
+//------ Getter & Setter ----------
+
+
+    public void setA(float a) {
+        this.a = a;
+    }
+
+    public void setB(float b) {
+        this.b = b;
+    }
+
+    public void setC(float c) {
+        this.c = c;
+    }
+
+    public float getA() {
+        return a;
+    }
+
+    public float getB() {
+        return b;
+    }
+
+    public float getC() {
+        return c;
+    }
+}

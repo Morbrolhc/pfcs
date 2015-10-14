@@ -15,6 +15,7 @@ public class Application extends GLBase1 {
     float bottom, top;
     float near = -10, far = 1000;
     FPSAnimator anim;
+    GL3 gl;
 
     Car actor = new Car(2f, 4f, 0f);
     //  ---------  Methoden  ----------------------------------
@@ -75,11 +76,11 @@ public class Application extends GLBase1 {
 
     public void moveCar(GL3 gl, Car car) {
         if(car.alpha <= 0.05 && car.alpha >= -0.05) {
-            translate(gl, car.v*0.17f, 0, 0);
+            translate(gl, car.v*0.017f, 0, 0);
         }
         else {
             translate(gl, 0, car.ym, 0);
-            rotate(gl, (car.v*0.17f*180f) / (car.ym*(float)Math.PI), 0, 0, 1);
+            rotate(gl, (car.v*0.017f*180f) / (car.ym*(float)Math.PI), 0, 0, 1);
             translate(gl, 0, -car.ym, 0);
         }
     }
@@ -89,7 +90,7 @@ public class Application extends GLBase1 {
     @Override
     public void init(GLAutoDrawable drawable) {
         super.init(drawable);
-        GL3 gl = drawable.getGL().getGL3();
+        gl = drawable.getGL().getGL3();
         gl.glClearColor(0, 0, 1, 1);                         // Hintergrundfarbe (RGBA)
         gl.glDisable(GL3.GL_DEPTH_TEST);                  // ohne Sichtbarkeitstest
         anim = new FPSAnimator(canvas, 60, true);
@@ -136,18 +137,29 @@ public class Application extends GLBase1 {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         switch(code) {
-            case KeyEvent.VK_W:
-                actor.v+=0.2f;
+            case KeyEvent.VK_UP:
+                actor.v+=1f;
                 break;
-            case KeyEvent.VK_A:
-                actor.setAlpha(actor.alpha+0.04f);
+            case KeyEvent.VK_LEFT:
+                actor.setAlpha(actor.alpha+0.06f);
                 break;
-            case KeyEvent.VK_D:
-                actor.setAlpha(actor.alpha-0.04f);
+            case KeyEvent.VK_RIGHT:
+                actor.setAlpha(actor.alpha-0.06f);
+                break;
+            case KeyEvent.VK_DOWN:
+                actor.v-=1f;
+                break;
+            case KeyEvent.VK_V:
+                actor.v *=(-1);
+                break;
+            case KeyEvent.VK_R:
+                actor.setAlpha(0);
+                loadIdentity(gl);
+                actor.v = 0;
                 break;
             case KeyEvent.VK_S:
-                actor.v-=0.2f;
-                break;
+                if(actor.v == 0) actor.v = 1;
+                else actor.v = 0;
         }
     }
 }

@@ -17,13 +17,9 @@ public class Car {
     }
 
     public void setAlpha(float alpha) {
+
         this.alpha = alpha;
-//        if(alpha > 0) {
-            ym = h / 2 + (float) (w / Math.tan(alpha));
-            beta = (float) Math.atan(w / (ym + h / 2));
-//        } else {
-//            ym = (float) (w / Math.tan(alpha)) - h / 2;
-//            beta = (float) Math.atan(w / (ym - h / 2));
-//        }
+        ym = h / 2 + (float) (w / Math.tan(alpha));
+        beta = (float) Math.atan(w / (ym + h / 2));
     }
 }
