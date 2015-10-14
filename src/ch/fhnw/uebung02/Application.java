@@ -158,7 +158,7 @@ public class Application extends GLBase1 {
                 actor.v = 0;
                 break;
             case KeyEvent.VK_S:
-                if(actor.v == 0) actor.v = 1;
+                if(actor.v == 0) actor.v = 2;
                 else actor.v = 0;
         }
     }

@@ -78,10 +78,8 @@ public class GLShaders
 
     static public String textFileRead(String filePath)
     {  // Read the data in
-       BufferedReader reader = null;
-       try
-       {  // Read in the source
-          reader = new BufferedReader(new FileReader(filePath));
+       try (BufferedReader reader = new BufferedReader(
+               new InputStreamReader(GLShaders.class.getClassLoader().getResourceAsStream(filePath)))) {
           StringBuilder sb = new StringBuilder();
           String line;
           while ((line = reader.readLine()) != null)
