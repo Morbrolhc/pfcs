@@ -5,11 +5,11 @@ package ch.fhnw.uebung01;
  */
 public class Timer implements Runnable{
 
-    Application inst;
+    MainTrack inst;
 
     double oldTime;
 
-    public Timer(Application inst) {
+    public Timer(MainTrack inst) {
         this.inst = inst;
         oldTime = System.nanoTime();
     }

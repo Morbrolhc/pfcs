@@ -1,8 +1,12 @@
 package ch.fhnw.glbase;//  --------  Interface to OpenGL 3.0  --------------
 //                                        E. Gutknecht Juli 2015
-import javax.media.opengl.*;
-import javax.media.opengl.awt.*;
-import ch.fhnw.util.math.*;
+
+import ch.fhnw.util.math.Mat4;
+import ch.fhnw.util.math.Vec3;
+
+import javax.media.opengl.GL;
+import javax.media.opengl.GL3;
+import javax.media.opengl.awt.GLCanvas;
 
 
 public interface MyRenderer1
@@ -14,9 +18,15 @@ public interface MyRenderer1
 
     public void setColor(float r, float g, float b);       // aktuelle Vertexfarbe setzen
 
+    public void setNormal(float x, float y, float z);
+
+    public void setShadingLevel(GL3 gl, int level);
+
+    public void setLightPosition(GL3 gl, float x, float y, float z);
+
     void putVertex(float x, float y, float z);             // Vertex-Daten in Buffer speichern
 
-    public void copyBuffer(GL gl,int nVertices);           // Vertex-Array in OpenGL-Buffer kopieren
+    public void copyBuffer(GL gl, int nVertices);           // Vertex-Array in OpenGL-Buffer kopieren
 
     public void rewindBuffer(GL gl);                       // Bufferposition zuruecksetzen
 
@@ -59,13 +69,13 @@ public interface MyRenderer1
     //  ---------  Projektion auf Bildebene -------------------
 
     public void setOrthogonalProjection(GL3 gl, float left, float right,           // Grenzen des ViewingVolumes
-                                      float bottom, float top,
-                                      float near, float far);
+                                        float bottom, float top,
+                                        float near, float far);
 
 
     public void setPerspectiveProjection(GL3 gl, float left, float right,          // Grenzen des ViewingVolumes
-                                      float bottom, float top,
-                                      float near, float far);
+                                         float bottom, float top,
+                                         float near, float far);
 
 
 }

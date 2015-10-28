@@ -1,8 +1,9 @@
 package ch.fhnw.glbase;//  -------------   JOGL 3D-Programm  -------------------
 
+import ch.fhnw.util.math.Vec3;
+
 import javax.media.opengl.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class MyFirst3D extends GLBase1 {
 
@@ -25,6 +26,10 @@ public class MyFirst3D extends GLBase1 {
                                float x2, float y2, float z2,
                                float x3, float y3, float z3) {
         rewindBuffer(gl);
+        Vec3 u = new Vec3(x2-x1, y2-y1, z2-z1);
+        Vec3 v = new Vec3(x3-x1, y3-y1, z3-z1);
+        Vec3 n = u.cross(v);
+        setNormal(n.x, n.y, n.z);
         putVertex(x1, y1, z1);           // Eckpunkte in VertexArray speichern
         putVertex(x2, y2, z2);
         putVertex(x3, y3, z3);
@@ -40,6 +45,8 @@ public class MyFirst3D extends GLBase1 {
     public void init(GLAutoDrawable drawable) {
         super.init(drawable);
         GL3 gl = drawable.getGL().getGL3();
+        setShadingLevel(gl, 1);
+        setLightPosition(gl, 5, 5, 3);
     }
 
 
@@ -51,11 +58,9 @@ public class MyFirst3D extends GLBase1 {
         // ------  Kamera-System  -------
 
         setCameraSystem(gl, dCam, elevation, azimut);
-        setColor(0.8f, 0.8f, 0.8f);
+        setColor(0.8f, 0.8f, 0f);
+        setLightPosition(gl, 0, 6, 10);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
-        cub.draw(gl);
-        translate(gl, 2, 0.7f, 0);
-        rotate(gl, 45, 0.7f, 0.4f, 0);
         cub.draw(gl);
     }
 

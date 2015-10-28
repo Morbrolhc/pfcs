@@ -23,6 +23,7 @@ public class Cuboid {
     }
 
     public void draw(GL3 gl){
+        renderer.setColor(1,1,0);
         float a2 = a*0.5f, b2 = b*0.5f, c2 = c*0.5f;
         Vec3 A = new Vec3(a2, -b2, c2);
         Vec3 B = new Vec3(a2, -b2, -c2);
@@ -32,19 +33,18 @@ public class Cuboid {
         Vec3 F = new Vec3(a2, b2, -c2);
         Vec3 G = new Vec3(-a2, b2, -c2);
         Vec3 H = new Vec3(-a2, b2, c2);
-        renderer.setColor(0.2f, 0.2f, 0);
+        renderer.setNormal(0 , -1, 0);
         putRectangle(D, C, B, A);
-        renderer.setColor(0.8f, 0.8f, 0);
+        renderer.setNormal(0, 1, 0);
         putRectangle(E, F, G, H);
-        renderer.setColor(0.3f, 0.3f, 0);
+        renderer.setNormal(1, 0, 0);
         putRectangle(A, B, F, E);
-        renderer.setColor(0.4f, 0.4f, 0);
+        renderer.setNormal(0, 0, 1);
         putRectangle(D, A, E, H);
-        renderer.setColor(0.5f, 0.5f, 0);
+        renderer.setNormal(-1, 0, 0);
         putRectangle(D, H, G, C);
-        renderer.setColor(0.6f, 0.6f, 0);
+        renderer.setNormal(0, 0, -1);
         putRectangle(B, C, G, F);
-        renderer.rewindBuffer(gl);
         renderer.copyBuffer(gl, 36);
         gl.glDrawArrays(GL3.GL_TRIANGLES, 0, 36);
     }

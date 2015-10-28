@@ -1,49 +1,50 @@
 package ch.fhnw.uebung01;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
  * Created by joel on 21.09.15.
  */
-public class Menu extends Panel {
+public class Menu extends JPanel {
 
-    Application app;
-    TextField c1x;
-    TextField c1v;
-    TextField c1m;
-    TextField c2x;
-    TextField c2v;
-    TextField c2m;
-    Button restart = new Button("Restart");
-    TextField tk;
+    MainTrack app;
+    JTextField c1x;
+    JTextField c1v;
+    JTextField c1m;
+    JTextField c2x;
+    JTextField c2v;
+    JTextField c2m;
+    JButton restart = new JButton("Restart");
+    JTextField tk;
 
 
-    public Menu(Application app) {
+    public Menu(MainTrack app) {
         this.app = app;
         setBackground(Color.WHITE);
-        c1x = new TextField(Double.toString(app.a.x));
-        c1v = new TextField(Double.toString(app.a.v));
-        c1m = new TextField(Double.toString(app.a.m));
-        c2x = new TextField(Double.toString(app.b.x));
-        c2v = new TextField(Double.toString(app.b.v));
-        c2m = new TextField(Double.toString(app.b.m));
-        tk = new TextField(Double.toString(app.k));
+        c1x = new JTextField(Double.toString(app.a.x));
+        c1v = new JTextField(Double.toString(app.a.v));
+        c1m = new JTextField(Double.toString(app.a.m));
+        c2x = new JTextField(Double.toString(app.b.x));
+        c2v = new JTextField(Double.toString(app.b.v));
+        c2m = new JTextField(Double.toString(app.b.m));
+        tk = new JTextField(Double.toString(app.k));
         setLayout(new GridLayout(11, 2));
-        add(new Label("Cart 1:        "));
-        add(new Label(""));
-        add(new Label("Pos"));
+        add(new JLabel("Cart 1:        "));
+        add(new JLabel(""));
+        add(new JLabel("Pos"));
         add(c1x);
-        add(new Label("v"));
+        add(new JLabel("v"));
         add(c1v);
-        add(new Label("m"));
+        add(new JLabel("m"));
         add(c1m);
-        add(new Label("Cart 2:        "));
-        add(new Label(""));
-        add(new Label("Pos"));
+        add(new JLabel("Cart 2:        "));
+        add(new JLabel(""));
+        add(new JLabel("Pos"));
         add(c2x);
-        add(new Label("v"));
+        add(new JLabel("v"));
         add(c2v);
-        add(new Label("m"));
+        add(new JLabel("m"));
         add(c2m);
         add(restart);
         restart.addActionListener(e -> {
@@ -54,10 +55,10 @@ public class Menu extends Panel {
             app.b.v = Float.parseFloat(c2v.getText());
             app.b.m = Float.parseFloat(c2m.getText());
         });
-        add(new Label(""));
-        add(new Label("k"));
+        add(new JLabel(""));
+        add(new JLabel("k"));
         add(tk);
-        Button b = new Button("Update k");
+        JButton b = new JButton("Update k");
         b.addActionListener(e -> {
             app.k = Double.parseDouble(tk.getText());
         });
