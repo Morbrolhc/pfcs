@@ -1,7 +1,10 @@
 package ch.fhnw.uebung01;
 
 import ch.fhnw.glbase.GLBase1;
+import com.jogamp.graph.curve.opengl.RenderState;
+import com.jogamp.graph.geom.SVertex;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.glsl.ShaderState;
 
 import javax.media.opengl.GL3;
 import javax.media.opengl.GLAutoDrawable;

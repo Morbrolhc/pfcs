@@ -1,5 +1,6 @@
 package ch.fhnw.glbase;//  -------------   JOGL 3D-Programm  -------------------
 
+import ch.fhnw.util.bodys.Cuboid;
 import ch.fhnw.util.math.Vec3;
 
 import javax.media.opengl.*;

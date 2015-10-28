@@ -1,5 +1,6 @@
-package ch.fhnw.glbase;
+package ch.fhnw.util.bodys;
 
+import ch.fhnw.glbase.MyRenderer1;
 import ch.fhnw.util.math.Vec3;
 
 import javax.media.opengl.GL3;
@@ -13,7 +14,7 @@ public class Cuboid {
     private float b;
     private float c;
 
-    private MyRenderer1 renderer;
+    MyRenderer1 renderer;
 
     public Cuboid(MyRenderer1 renderer, float a, float b, float c){
         this.renderer = renderer;

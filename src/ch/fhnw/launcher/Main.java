@@ -2,6 +2,7 @@ package ch.fhnw.launcher;
 
 import ch.fhnw.uebung01.MainTrack;
 import ch.fhnw.uebung02.MainCar;
+import ch.fhnw.uebung03.MainStorm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,8 @@ public class Main extends JFrame {
 
     final private static String UEBUNG01 = "Uebung 01 - LBahn";
     final private static String UEBUNG02 = "Uebung 02 - Car";
+    final private static String UEBUNG03 = "Uebung 03 - Storm";
+
 
     public static void main(String[] args) {
         new Main();
@@ -24,7 +27,7 @@ public class Main extends JFrame {
         frame.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("logo.png")).getImage());
 
 
-        String[] options = new String[] {UEBUNG01, UEBUNG02};
+        String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03};
 
         Icon icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
 
@@ -43,6 +46,9 @@ public class Main extends JFrame {
                 break;
             case UEBUNG02:
                 new MainCar();
+                break;
+            case UEBUNG03:
+                new MainStorm();
                 break;
         }
     }
