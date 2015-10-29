@@ -35,7 +35,7 @@ public class MainStorm extends GLBase1 {
 
     public MainStorm() {
         super();
-        regenerateObjects(1500);
+        regenerateObjects(10000);
         menu = new Menu(this);
         timer = new Timer(objects);
         new Thread(timer).start();
