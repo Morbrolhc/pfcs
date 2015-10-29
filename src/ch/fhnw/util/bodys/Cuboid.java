@@ -24,7 +24,7 @@ public class Cuboid {
     }
 
     public void draw(GL3 gl){
-        renderer.setColor(1f,0.7f,0, 1);
+        renderer.setColor(1f,1f,0, 1);
         float a2 = a*0.5f, b2 = b*0.5f, c2 = c*0.5f;
         Vec3 A = new Vec3(a2, -b2, c2);
         Vec3 B = new Vec3(a2, -b2, -c2);

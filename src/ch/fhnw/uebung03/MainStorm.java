@@ -2,6 +2,7 @@ package ch.fhnw.uebung03;//  -------------   JOGL 3D-Programm  -----------------
 
 import ch.fhnw.glbase.GLBase1;
 import ch.fhnw.util.Timer;
+import ch.fhnw.util.bodys.Cuboid;
 import ch.fhnw.util.bodys.FlyingCuboid;
 import ch.fhnw.util.properties.IAnimatable;
 import com.jogamp.opengl.util.FPSAnimator;
@@ -34,7 +35,7 @@ public class MainStorm extends GLBase1 {
 
     public MainStorm() {
         super();
-        regenerateObjects(1000);
+        regenerateObjects(1500);
         menu = new Menu(this);
         timer = new Timer(objects);
         new Thread(timer).start();
@@ -51,7 +52,8 @@ public class MainStorm extends GLBase1 {
     }
 
     public FlyingCuboid generateObject() {
-        return new FlyingCuboid(this, 0.02f, 0.02f, 0.02f, (float)Math.random()*10 + 1,
+        Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f);
+        return new FlyingCuboid(cub, (float)Math.random()*10 + 1,
                 ((float)Math.random()-0.5f)*2, ((float)Math.random()-0.5f)*2, -2000,
                 (float)Math.random(), (float)Math.random(), (float)Math.random(), (float)Math.random()*10);
     }
@@ -65,9 +67,7 @@ public class MainStorm extends GLBase1 {
         setShadingLevel(gl, 1);
         setLightPosition(gl, 5, 5, 0);
         gl.glClearColor(0, 0, 0, 1);
-
         anim.start();
-
     }
 
 

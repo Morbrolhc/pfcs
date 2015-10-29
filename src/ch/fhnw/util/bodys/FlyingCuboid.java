@@ -8,18 +8,19 @@ import javax.media.opengl.GL3;
 /**
  * Created by joel on 28.10.15.
  */
-public class FlyingCuboid extends Cuboid implements IAnimatable {
+public class FlyingCuboid implements IAnimatable {
 
     float v;
     float px, py, pz;
     float rx, ry, rz, rv;
     float phi;
     public static float SPEED = 1;
+    Cuboid cub;
+    MyRenderer1 renderer;
 
-    public FlyingCuboid(MyRenderer1 renderer, float a, float b, float c,
+    public FlyingCuboid(Cuboid cub,
                         float v, float px, float py, float pz,
                         float rx, float ry, float rz, float rv) {
-        super(renderer, a, b, c);
         this.v = v;
         this.px = px;
         this.py = py;
@@ -28,6 +29,8 @@ public class FlyingCuboid extends Cuboid implements IAnimatable {
         this.rz = rz;
         this.rv = rv;
         this.pz = pz;
+        this.cub = cub;
+        renderer = cub.renderer;
 
         phi = 0;
     }
@@ -37,7 +40,7 @@ public class FlyingCuboid extends Cuboid implements IAnimatable {
         renderer.pushMatrix(gl);
         renderer.translate(gl, px, py, pz);
         renderer.rotate(gl, phi, rx, ry, rz);
-        super.draw(gl);
+        cub.draw(gl);
         renderer.popMatrix(gl);
     }
 
