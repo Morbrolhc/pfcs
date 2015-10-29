@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: gluegen-rt.jar jogl-all.jar gluegen-rt-natives-linux-amd64
+ .jar jogl-all-natives-linux-amd64.jar
+Main-Class: ch.fhnw.uebung02.MainCar
+
