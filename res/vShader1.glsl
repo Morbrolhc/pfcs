@@ -63,7 +63,7 @@ void main()
       else
         Is = specularIntens(toLight, Normal, toEye,                // spiegelnd reflektiertes Licht
                             specular, specularExp);
-      vec3 whiteColor = vec3(1,1,1); 
+      vec3 whiteColor = vec3(1,1,1);
       vec3 reflectedLight = (ambient + Id) * Color.rgb + Is * whiteColor; 
       Color.rgb = min(reflectedLight, whiteColor);
    }

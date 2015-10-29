@@ -16,7 +16,7 @@ public interface MyRenderer1
 
     //  --------  Vertex-Methoden  -----------
 
-    public void setColor(float r, float g, float b);       // aktuelle Vertexfarbe setzen
+    public void setColor(float r, float g, float b, float a);       // aktuelle Vertexfarbe setzen
 
     public void setNormal(float x, float y, float z);
 

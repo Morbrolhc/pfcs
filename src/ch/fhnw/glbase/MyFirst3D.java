@@ -59,7 +59,7 @@ public class MyFirst3D extends GLBase1 {
         // ------  Kamera-System  -------
 
         setCameraSystem(gl, dCam, elevation, azimut);
-        setColor(0.8f, 0.8f, 0f);
+        setColor(0.8f, 0.8f, 0f, 1);
         setLightPosition(gl, 0, 6, 10);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
         cub.draw(gl);

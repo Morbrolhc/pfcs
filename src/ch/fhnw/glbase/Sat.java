@@ -53,9 +53,9 @@ public class Sat extends GLBase1 {
         GL3 gl = drawable.getGL().getGL3();
         gl.glClear(GL3.GL_COLOR_BUFFER_BIT | GL3.GL_DEPTH_BUFFER_BIT);
         loadIdentity(gl);
-        setColor(0, 1, 0);
+        setColor(0, 1, 0, 1);
         drawEarth(gl);
-        setColor(0, 0, 0);
+        setColor(0, 0, 0, 1);
         sat.draw(gl);
         for(int i = 0; i < 10; i++);
         sat.move();

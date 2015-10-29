@@ -1,10 +1,7 @@
 package ch.fhnw.uebung01;
 
 import ch.fhnw.glbase.GLBase1;
-import com.jogamp.graph.curve.opengl.RenderState;
-import com.jogamp.graph.geom.SVertex;
 import com.jogamp.opengl.util.FPSAnimator;
-import com.jogamp.opengl.util.glsl.ShaderState;
 
 import javax.media.opengl.GL3;
 import javax.media.opengl.GLAutoDrawable;
@@ -43,7 +40,7 @@ public class MainTrack extends GLBase1 {
     public void drawRectangle(GL3 gl, float x1, float y1, float x2, float y2,
                               float r, float g, float b) {
         rewindBuffer(gl);
-        setColor(r, g, b);
+        setColor(r, g, b, 1);
         putVertex(x1, y1, 0);
         putVertex(x2, y1, 0);
         putVertex(x2, y2, 0);
@@ -55,7 +52,7 @@ public class MainTrack extends GLBase1 {
 
     public void drawStrip(GL3 gl, float[] vertices, float r, float g, float b) {
         rewindBuffer(gl);
-        setColor(r, g, b);
+        setColor(r, g, b, 1);
         for (int i = 0; i < vertices.length; i += 2) {
             putVertex(vertices[i], vertices[i + 1], 0);
         }
@@ -127,7 +124,7 @@ public class MainTrack extends GLBase1 {
     public void display(GLAutoDrawable drawable) {
         GL3 gl = drawable.getGL().getGL3();
         gl.glClear(GL3.GL_COLOR_BUFFER_BIT);
-        setColor(1, 1, 1);
+        setColor(1, 1, 1, 1);
         drawSetup(gl);
         drawCart(gl, (float) a.x, a.r, a.g, a.b);
         drawCart(gl, (float) b.x, b.r, b.g, b.b);

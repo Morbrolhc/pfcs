@@ -5,7 +5,6 @@ package ch.fhnw.glbase;//  -------------   JOGL Basis-Programm (fuer Erweiterung
 //  http://www.lighthouse3d.com/cg-topics/code-samples/opengl-3-3-glsl-1-5-sample/
 //
 
-import ch.fhnw.launcher.Main;
 import ch.fhnw.util.math.Mat4;
 import ch.fhnw.util.math.Vec3;
 import ch.fhnw.util.math.Vec4;
@@ -179,12 +178,12 @@ public class GLBase1
 
     // --------  Vertex-Methoden  --------
 
-    public void setColor(float r, float g, float b)             // aktuelle Vertexfarbe setzen
+    public void setColor(float r, float g, float b, float a)             // aktuelle Vertexfarbe setzen
     {
         currentColor[0] = r;
         currentColor[1] = g;
         currentColor[2] = b;
-        currentColor[3] = 1;
+        currentColor[3] = a;
     }
 
     public void setNormal(float x, float y, float z) {
@@ -392,7 +391,7 @@ public class GLBase1
     public void display(GLAutoDrawable drawable) {
         GL3 gl = drawable.getGL().getGL3();
         gl.glClear(GL3.GL_COLOR_BUFFER_BIT | GL3.GL_DEPTH_BUFFER_BIT);
-        setColor(0.8f, 0.8f, 0.8f);
+        setColor(0.8f, 0.8f, 0.8f, 1);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
     }
 
@@ -408,7 +407,7 @@ public class GLBase1
         float left = -1, right = 1;                       // ViewingVolume im Kamera-System
         float bottom = -1, top = 1;
         float near = -10, far = 1000;
-        setOrthogonalProjection(gl, left, right, bottom, top, near, far);
+        setPerspectiveProjection(gl, left, right, bottom, top, near, far);
     }
 
 

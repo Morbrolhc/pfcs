@@ -9,6 +9,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 import javax.media.opengl.GL3;
 import javax.media.opengl.GLAutoDrawable;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,31 +17,45 @@ public class MainStorm extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
-    float left = -1, right = 1;
+    float left = -0.06f, right = 0.06f;
     float bottom, top;
-    float near = -10, far = 1000;
+    float near = 0.4f, far = 2000;
 
-    float dCam = 10;                 // Abstand vom absoluten Nullpunkt
-    float elevation = 10;            // Orientierung
-    float azimut = 20;
+    float dCam = 0;                 // Abstand vom absoluten Nullpunkt
+    float elevation = 0;            // Orientierung
+    float azimut = 0;
 
     Timer timer;
-    FPSAnimator anim;
-    List<IAnimatable> objects = new ArrayList<>();
+    FPSAnimator anim = new FPSAnimator(canvas, 60, true);
+    List<IAnimatable> objects;
+    Menu menu;
 
     //  ---------  Methoden  ----------------------------------
 
     public MainStorm() {
         super();
-        for(int i = 0; i < 500; i++) objects.add(new FlyingCuboid(this, 0.05f, 0.05f, 0.05f, (float)Math.random()*10,
-                (float)Math.random()-0.5f, (float)Math.random()-0.5f, -20,
-                (float)Math.random(), (float)Math.random(), (float)Math.random(), (float)Math.random()*10));
-        for(int i = 0; i < 100000; i++) {
-            for(IAnimatable a : objects) a.update(0.1);
-        }
+        regenerateObjects(1000);
+        menu = new Menu(this);
         timer = new Timer(objects);
         new Thread(timer).start();
     }
+
+    public void regenerateObjects(int n) {
+        anim.stop();
+        objects = new ArrayList<>(n);
+        for(int i = 0; i < n; i++) objects.add(generateObject());
+        for(int i = 0; i < 100000; i++) {
+            for(IAnimatable a : objects) a.update(0.1);
+        }
+        anim.start();
+    }
+
+    public FlyingCuboid generateObject() {
+        return new FlyingCuboid(this, 0.02f, 0.02f, 0.02f, (float)Math.random()*10 + 1,
+                ((float)Math.random()-0.5f)*2, ((float)Math.random()-0.5f)*2, -2000,
+                (float)Math.random(), (float)Math.random(), (float)Math.random(), (float)Math.random()*10);
+    }
+
     //  ----------  OpenGL-Events   ---------------------------
 
     @Override
@@ -48,8 +63,9 @@ public class MainStorm extends GLBase1 {
         super.init(drawable);
         GL3 gl = drawable.getGL().getGL3();
         setShadingLevel(gl, 1);
-        setLightPosition(gl, 5, 5, 3);
-        anim = new FPSAnimator(canvas, 60, true);
+        setLightPosition(gl, 5, 5, 0);
+        gl.glClearColor(0, 0, 0, 1);
+
         anim.start();
 
     }
@@ -63,7 +79,7 @@ public class MainStorm extends GLBase1 {
         // ------  Kamera-System  -------
 
         setCameraSystem(gl, dCam, elevation, azimut);
-        setColor(0.8f, 0.8f, 0f);
+        setColor(0.8f, 0.8f, 0f, 1);
         setLightPosition(gl, 0, 6, 10);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
         for(IAnimatable a : objects) a.draw(gl);
@@ -81,7 +97,7 @@ public class MainStorm extends GLBase1 {
         float aspect = (float) height / width;
         bottom = aspect * left;
         top = aspect * right;
-        setOrthogonalProjection(gl, left, right, bottom, top, near, far);
+        setPerspectiveProjection(gl, left, right, bottom, top, near, far);
     }
 
 
@@ -109,6 +125,11 @@ public class MainStorm extends GLBase1 {
                 break;
         }
         canvas.display();
+    }
 
+    @Override
+    public void windowClosing(WindowEvent e) {
+        super.windowClosing(e);
+        menu.dispose();
     }
 }

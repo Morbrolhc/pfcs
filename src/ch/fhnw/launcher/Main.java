@@ -28,14 +28,8 @@ public class Main extends JFrame {
     }
 
     public Main() {
-
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("logo.png")).getImage());
         drawWindow();
-
-
-
-
-
     }
 
     private void drawWindow() {
@@ -45,7 +39,7 @@ public class Main extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setLocation(600, 100);
+        setLocation(500, 300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new GridBagLayout());

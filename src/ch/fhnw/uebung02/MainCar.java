@@ -39,7 +39,7 @@ public class MainCar extends GLBase1 {
             copyBuffer(gl, 2);
             gl.glDrawArrays(GL3.GL_LINES, 0, 2);
 
-            setColor(0, 1, 0);
+            setColor(0, 1, 0, 1);
             rewindBuffer(gl);
             putVertex(0, 0, 0);
             putVertex(0, car.currA, 0);
@@ -47,7 +47,7 @@ public class MainCar extends GLBase1 {
             gl.glDrawArrays(GL3.GL_LINES, 0, 2);
         }
 
-        setColor(1, 0, 0);
+        setColor(1, 0, 0, 1);
         rewindBuffer(gl);
         float y1 = car.h / 2 + car.h * 0.1f;
         float y2 = car.h / 2 + car.h * 0.1f + car.tyreH;
@@ -122,10 +122,10 @@ public class MainCar extends GLBase1 {
         gl.glClear(GL3.GL_COLOR_BUFFER_BIT);
         pushMatrix(gl);
         loadIdentity(gl);
-        setColor(1, 1, 1);
+        setColor(1, 1, 1, 1);
         drawAxis(gl, 8, 8, 8);
         popMatrix(gl);//  Koordinatenachsen
-        setColor(1, 0, 0);
+        setColor(1, 0, 0, 1);
         drawCar(gl, actor);
         moveCar(gl, actor);
     }

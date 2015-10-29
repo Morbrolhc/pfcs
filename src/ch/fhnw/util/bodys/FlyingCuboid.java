@@ -14,6 +14,7 @@ public class FlyingCuboid extends Cuboid implements IAnimatable {
     float px, py, pz;
     float rx, ry, rz, rv;
     float phi;
+    public static float SPEED = 1;
 
     public FlyingCuboid(MyRenderer1 renderer, float a, float b, float c,
                         float v, float px, float py, float pz,
@@ -44,8 +45,7 @@ public class FlyingCuboid extends Cuboid implements IAnimatable {
     public void update(double dTime) {
         phi+= dTime*rv*50;
         if(phi > 360) phi = 0;
-        pz += dTime*v;
-        if(pz > 20.0) pz = -20;
-
+        pz += dTime*v*SPEED;
+        if(pz > 41.0) pz = -20;
     }
 }

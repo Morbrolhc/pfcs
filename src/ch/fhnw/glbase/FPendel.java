@@ -21,9 +21,9 @@ public class FPendel extends GLBase1
                            float r, int nPoints) {
         rewindBuffer(gl);
         double phi = 2*Math.PI/nPoints;
-        setColor(1f, 0.3f, 0f);
+        setColor(1f, 0.3f, 0f, 1);
         putVertex(xm, ym, 0);
-        setColor(1f, 0f, 0f);
+        setColor(1f, 0f, 0f, 1);
         for (int i = 0; i <= nPoints; i++) {
             putVertex((float)(xm+r*Math.cos(i*phi)), (float)(ym+r*Math.sin(i*phi)), 0);
         }
@@ -48,9 +48,9 @@ public class FPendel extends GLBase1
     public void display(GLAutoDrawable drawable)
     { GL3 gl = drawable.getGL().getGL3();
       gl.glClear(GL3.GL_COLOR_BUFFER_BIT);
-      setColor(1, 1, 1);
+      setColor(1, 1, 1, 1);
       drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
-      setColor(1, 0, 0);
+      setColor(1, 0, 0, 1);
       phi +=0.04;
       drawCircle(gl, 0, (float) (R * Math.sin(phi)), 0.5f, 50);
       drawCircle(gl, (float) (R * Math.cos(phi)), 0, 0.5f, 50);

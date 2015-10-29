@@ -40,9 +40,9 @@ public class MyFirst2D extends GLBase1
     public void display(GLAutoDrawable drawable)
     { GL3 gl = drawable.getGL().getGL3();
       gl.glClear(GL3.GL_COLOR_BUFFER_BIT);
-      setColor(1,1,1);
+      setColor(1,1,1, 1);
       drawAxis(gl, 8,8,8);             //  Koordinatenachsen
-      setColor(1,0,0);
+      setColor(1,0,0, 1);
       zeichneDreieck(gl,-0.5f,-0.5f,0, 0.5f,-0.5f,0, 0,0.5f,0);
     }
 
