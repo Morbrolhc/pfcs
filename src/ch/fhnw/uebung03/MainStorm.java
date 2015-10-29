@@ -16,7 +16,7 @@ public class MainStorm extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
-    float left = -5, right = 5;
+    float left = -1, right = 1;
     float bottom, top;
     float near = -10, far = 1000;
 
@@ -27,18 +27,17 @@ public class MainStorm extends GLBase1 {
     Timer timer;
     FPSAnimator anim;
     List<IAnimatable> objects = new ArrayList<>();
-    FlyingCuboid cub;
 
     //  ---------  Methoden  ----------------------------------
 
     public MainStorm() {
         super();
-        objects.add(new FlyingCuboid(this, 0.3f, 0.3f, 0.3f, 1, 1, 0,
-                (float)Math.random(), (float)Math.random(), (float)Math.random(), 1));
-        objects.add(new FlyingCuboid(this, 0.3f, 0.3f, 0.3f, 1, 0, 0,
-                (float)Math.random(), (float)Math.random(), (float)Math.random(), 2));
-        objects.add(new FlyingCuboid(this, 0.3f, 0.3f, 0.3f, 1, -1, 0,
-                (float)Math.random(), (float)Math.random(), (float)Math.random(), 3));
+        for(int i = 0; i < 500; i++) objects.add(new FlyingCuboid(this, 0.05f, 0.05f, 0.05f, (float)Math.random()*10,
+                (float)Math.random()-0.5f, (float)Math.random()-0.5f, -20,
+                (float)Math.random(), (float)Math.random(), (float)Math.random(), (float)Math.random()*10));
+        for(int i = 0; i < 100000; i++) {
+            for(IAnimatable a : objects) a.update(0.1);
+        }
         timer = new Timer(objects);
         new Thread(timer).start();
     }
@@ -52,6 +51,7 @@ public class MainStorm extends GLBase1 {
         setLightPosition(gl, 5, 5, 3);
         anim = new FPSAnimator(canvas, 60, true);
         anim.start();
+
     }
 
 

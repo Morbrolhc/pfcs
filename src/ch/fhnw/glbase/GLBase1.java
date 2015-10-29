@@ -421,7 +421,6 @@ public class GLBase1
 
     public void windowClosing(WindowEvent e) {
         f.dispose();
-        new Main();
     }
 
     public void windowActivated(WindowEvent e) {

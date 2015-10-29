@@ -11,12 +11,12 @@ import javax.media.opengl.GL3;
 public class FlyingCuboid extends Cuboid implements IAnimatable {
 
     float v;
-    float px, py, pz = -20;
+    float px, py, pz;
     float rx, ry, rz, rv;
     float phi;
 
     public FlyingCuboid(MyRenderer1 renderer, float a, float b, float c,
-                        float v, float px, float py,
+                        float v, float px, float py, float pz,
                         float rx, float ry, float rz, float rv) {
         super(renderer, a, b, c);
         this.v = v;
@@ -26,6 +26,8 @@ public class FlyingCuboid extends Cuboid implements IAnimatable {
         this.ry = ry;
         this.rz = rz;
         this.rv = rv;
+        this.pz = pz;
+
         phi = 0;
     }
 
@@ -41,6 +43,9 @@ public class FlyingCuboid extends Cuboid implements IAnimatable {
     @Override
     public void update(double dTime) {
         phi+= dTime*rv*50;
+        if(phi > 360) phi = 0;
         pz += dTime*v;
+        if(pz > 20.0) pz = -20;
+
     }
 }
