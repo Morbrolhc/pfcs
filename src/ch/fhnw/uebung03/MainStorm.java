@@ -30,12 +30,13 @@ public class MainStorm extends GLBase1 {
     FPSAnimator anim = new FPSAnimator(canvas, 60, true);
     List<IAnimatable> objects;
     Menu menu;
+    Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f, 1, 1, 0);
 
     //  ---------  Methoden  ----------------------------------
 
     public MainStorm() {
         super();
-        regenerateObjects(10000);
+        regenerateObjects(1000);
         menu = new Menu(this);
         timer = new Timer(objects);
         new Thread(timer).start();
@@ -51,10 +52,14 @@ public class MainStorm extends GLBase1 {
         anim.start();
     }
 
+    public Cuboid getCuboid() {
+        return cub;
+    }
+
     public FlyingCuboid generateObject() {
-        Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f);
+
         return new FlyingCuboid(cub, (float)Math.random()*10 + 1,
-                ((float)Math.random()-0.5f)*2, ((float)Math.random()-0.5f)*2, -2000,
+                ((float)Math.random()-0.5f)*4, ((float)Math.random()-0.5f)*4, -100,
                 (float)Math.random(), (float)Math.random(), (float)Math.random(), (float)Math.random()*10);
     }
 

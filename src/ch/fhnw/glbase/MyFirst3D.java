@@ -18,7 +18,7 @@ public class MyFirst3D extends GLBase1 {
     float elevation = 10;            // Orientierung
     float azimut = 20;
 
-    Cuboid cub = new Cuboid(this, 2, 2, 2);
+    Cuboid cub = new Cuboid(this, 2, 2, 2, 1, 1, 0);
 
 
     //  ---------  Methoden  ----------------------------------

@@ -49,6 +49,6 @@ public class FlyingCuboid implements IAnimatable {
         phi+= dTime*rv*50;
         if(phi > 360) phi = 0;
         pz += dTime*v*SPEED;
-        if(pz > 41.0) pz = -20;
+        if(pz > 1.0) pz = -100;
     }
 }

@@ -13,18 +13,22 @@ public class Cuboid {
     private float a;
     private float b;
     private float c;
+    private float cr, cg, cb;
 
     MyRenderer1 renderer;
 
-    public Cuboid(MyRenderer1 renderer, float a, float b, float c){
+    public Cuboid(MyRenderer1 renderer, float a, float b, float c, float cr, float cg, float cb){
         this.renderer = renderer;
         this.a = a;
         this.b = b;
         this.c = c;
+        this.cr = cr;
+        this.cg = cg;
+        this.cb = cb;
     }
 
     public void draw(GL3 gl){
-        renderer.setColor(1f,1f,0, 1);
+        renderer.setColor(cr, cg, cb, 1);
         float a2 = a*0.5f, b2 = b*0.5f, c2 = c*0.5f;
         Vec3 A = new Vec3(a2, -b2, c2);
         Vec3 B = new Vec3(a2, -b2, -c2);
@@ -86,5 +90,11 @@ public class Cuboid {
 
     public float getC() {
         return c;
+    }
+
+    public void setColor(float cr, float cg, float cb) {
+        this.cr = cr;
+        this.cg = cg;
+        this.cb = cb;
     }
 }
