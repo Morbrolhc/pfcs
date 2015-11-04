@@ -60,7 +60,8 @@ public class MainStorm extends GLBase1 {
 
         return new FlyingCuboid(cub, (float)Math.random()*10 + 1,
                 ((float)Math.random()-0.5f)*4, ((float)Math.random()-0.5f)*4, -100,
-                (float)Math.random(), (float)Math.random(), (float)Math.random(), (float)Math.random()*10);
+                ((float)Math.random()-0.5f), ((float)Math.random()-0.5f), ((float)Math.random()-0.5f),
+                (float)Math.random()*10);
     }
 
     //  ----------  OpenGL-Events   ---------------------------
@@ -134,7 +135,6 @@ public class MainStorm extends GLBase1 {
 
     @Override
     public void windowClosing(WindowEvent e) {
-        super.windowClosing(e);
-        menu.dispose();
+        System.exit(0);
     }
 }
