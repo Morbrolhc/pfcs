@@ -29,7 +29,7 @@ public class MainTrack extends GLBase1 {
 
     public MainTrack() {
         super();
-        f.setSize(900, 220);
+        f.setSize(900, 280);
         f.add(new Menu(this), BorderLayout.WEST);
         f.revalidate();
         f.repaint();

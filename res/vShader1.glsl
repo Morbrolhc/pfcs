@@ -25,13 +25,14 @@ float specularExp = 20;                  // Exponent spiegelnde Reflexion (Shini
 
 // -------  Hilfsmethoden  ----------------
 
-float diffuseIntens(vec3 toLight, vec3 Normal,   // diffuse Reflexion 
+float diffuseIntens(vec3 toLight, vec3 Normal, vec3 toEye,   // diffuse Reflexion
                      float diffuse)                    
-{  float intens = dot(Normal, toLight);           // Lambert-Gesetz 
-   if ( intens < 0.0f ) 
+{  float ldotn = dot(toLight, Normal);
+   float edotn = dot(toEye, Normal);           // Lambert-Gesetz
+   if ( ldotn * edotn < 0.0f || ldotn < 0.0f)
      return 0.0f;
    else
-     return diffuse * intens;
+     return diffuse * ldotn;
 }      
 
 
@@ -57,7 +58,7 @@ void main()
    {  vec3 Normal = normalize((viewMatrix * vertexNormal).xyz);    // ModelView-Transf.
       vec3 toLight = normalize(LightPosition.xyz - vertex.xyz);
       vec3 toEye = normalize(-vertex.xyz);                         // Richtung zur Kamera (in O)
-      Id = diffuseIntens(toLight, Normal, diffuse);                // diffus reflektiertes Licht
+      Id = diffuseIntens(toLight, Normal, toEye, diffuse);                // diffus reflektiertes Licht
       if ( Id == 0.0 )
         Is = 0.0;
       else

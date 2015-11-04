@@ -9,6 +9,8 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.media.opengl.GL3;
 import javax.media.opengl.GLAutoDrawable;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class MainStorm extends GLBase1 {
     float elevation = 0;            // Orientierung
     float azimut = 0;
 
+    boolean fullscreen = false;
     Timer timer;
     FPSAnimator anim = new FPSAnimator(canvas, 60, true);
     List<IAnimatable> objects;
@@ -36,10 +39,11 @@ public class MainStorm extends GLBase1 {
 
     public MainStorm() {
         super();
-        regenerateObjects(1000);
+        regenerateObjects(1500);
         menu = new Menu(this);
         timer = new Timer(objects);
         new Thread(timer).start();
+        System.out.printf(" " + Math.abs(Integer.MIN_VALUE));
     }
 
     public void regenerateObjects(int n) {
@@ -117,17 +121,21 @@ public class MainStorm extends GLBase1 {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         switch(code) {
-            case KeyEvent.VK_D:
-                azimut++;
-                break;
-            case KeyEvent.VK_W:
-                elevation++;
-                break;
-            case KeyEvent.VK_S:
-                elevation--;
-                break;
-            case KeyEvent.VK_A:
-                azimut--;
+            case KeyEvent.VK_F11:
+                if(!fullscreen) {
+                    f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    f.dispose();
+                    f.setUndecorated(true);
+                    f.setVisible(true);
+                    canvas.requestFocus();
+                    fullscreen = true;
+                } else {
+                    f.dispose();
+                    f.setUndecorated(false);
+                    f.setVisible(true);
+                    canvas.requestFocus();
+                    fullscreen = false;
+                }
                 break;
         }
         canvas.display();

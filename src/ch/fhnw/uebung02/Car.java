@@ -15,7 +15,7 @@ public class Car {
         setAlpha(alpha);
         tyreH = h/4;
         tyreW = w/4;
-        maxA = 1.2f*9.81f;
+        maxA = 0.8f*9.81f;
     }
 
     public void setAlpha(float alpha) {

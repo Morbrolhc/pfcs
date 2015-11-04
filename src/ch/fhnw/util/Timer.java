@@ -37,7 +37,7 @@ public class Timer implements Runnable{
                 ani.update((currentTime - oldTime)/1_000_000_000);
             oldTime = currentTime;
             try {
-                Thread.sleep(5);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
