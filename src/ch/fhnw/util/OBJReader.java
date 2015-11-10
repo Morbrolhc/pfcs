@@ -1,8 +1,9 @@
 package ch.fhnw.util;
 
+import ch.fhnw.util.math.Vec3;
+
 import java.io.File;
 import java.io.IOException;
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,24 +15,68 @@ public class OBJReader {
     public OBJReader() {
     }
 
-    public Mesh readMesh(String fileName) {
-        ArrayList<Float> list = new ArrayList<>(1000);
-        String name;
-        try(Scanner in = new Scanner(new File(getClass().getClassLoader().getResource(fileName).getFile()))) {
-            in.useDelimiter(" ");
+    ArrayList<Float> outVertexList = new ArrayList<>(20000);
+    ArrayList<Float> outNormList = new ArrayList<>(20000);
+
+    public Mesh readMesh(String _fileName) {
+        ArrayList<Vec3> vertexList = new ArrayList<>(4000);
+        ArrayList<Vec3> normList = new ArrayList<>(4000);
+        outVertexList.clear();
+        outNormList.clear();
+        try(Scanner in = new Scanner(new File(getClass().getClassLoader().getResource(_fileName).getFile()))) {
+            in.useDelimiter(" |\n");
             String ch = "\0";
+            // Wait for vertices
             while (!ch.equals("v")) {
                 in.nextLine();
                 ch = in.next();
             }
-            System.out.println(in.nextLine());
-            list.add(in.nextFloat());
-            list.add(in.nextFloat());
-            list.add(in.nextFloat());
-            ch = in.next();
-            System.out.println(in.next());
+            // Read all vertices
+            while (ch.equals("v")) {
+                vertexList.add(new Vec3(in.nextFloat(), in.nextFloat(), in.nextFloat()));
+                ch = in.next();
+            }
+            // Wait for normals
+            while (!ch.equals("vn")) {
+                in.nextLine();
+                ch = in.next();
+            }
+            // Read all normals
+            while (ch.equals("vn")) {
+                normList.add(new Vec3(in.nextFloat(), in.nextFloat(), in.nextFloat()));
+                ch = in.next();
+            }
+            // Wait for faces
+            while (!ch.equals("f")) {
+                in.nextLine();
+                ch = in.next();
+            }
+            // Read all faces
+            int v_i;
+            int n_i;
+            in.useDelimiter(" |\n|/");
+            while (ch.equals("f")) {
+                for(int i = 0; i < 3; i++) {
+                    v_i = in.nextInt();
+                    in.next();
+                    n_i = in.nextInt();
+                    Vec3 v = vertexList.get(v_i-1);
+                    Vec3 n = normList.get(n_i-1);
+                    outVertexList.add(v.x);
+                    outVertexList.add(v.y);
+                    outVertexList.add(v.z);
+                    outNormList.add(n.x);
+                    outNormList.add(n.y);
+                    outNormList.add(n.z);
+                }
+                if(in.hasNext()){
+                    ch = in.next();
+                } else {
+                    ch = "\0";
+                }
+            }
         } catch (IOException e){ e.printStackTrace();}
-        return null;
+        return new Mesh(outVertexList, outNormList);
     }
 
 }

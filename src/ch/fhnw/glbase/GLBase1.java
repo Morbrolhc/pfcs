@@ -28,7 +28,7 @@ public class GLBase1
     protected int windowHeight = 600;
     String vShader = "vShader1.glsl";               // Filename Vertex-Shader
     String fShader = "fShader1.glsl";               // Filename Fragment-Shader
-    int maxVerts = 2048;                            // max. Anzahl Vertices im Vertex-Array
+    int maxVerts = 200000;                            // max. Anzahl Vertices im Vertex-Array
 
 
     //  --------------  globale Daten  -------------------------------------
