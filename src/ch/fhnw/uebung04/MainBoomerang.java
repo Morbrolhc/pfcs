@@ -3,6 +3,7 @@ package ch.fhnw.uebung04;//  -------------   JOGL 3D-Programm  -----------------
 import ch.fhnw.glbase.GLBase1;
 import ch.fhnw.util.Mesh;
 import ch.fhnw.util.OBJReader;
+import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.media.opengl.GL3;
 import javax.media.opengl.GLAutoDrawable;
@@ -13,15 +14,17 @@ public class MainBoomerang extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
-    float left = -5, right = 5;
+    float left = -20, right = 20;
     float bottom, top;
     float near = -10, far = 1000;
 
     float dCam = 10;                 // Abstand vom absoluten Nullpunkt
-    float elevation = 10;            // Orientierung
+    float elevation = 30;            // Orientierung
     float azimut = 20;
 
-    Mesh boomerang;
+    Boomerang boomerang;
+    Boomerang boomerang2;
+    FPSAnimator anim;
 
     //  ---------  Methoden  ----------------------------------
 
@@ -34,11 +37,13 @@ public class MainBoomerang extends GLBase1 {
     @Override
     public void init(GLAutoDrawable drawable) {
         super.init(drawable);
-        boomerang = (new OBJReader()).readMesh("boomerang.obj");
-        boomerang.setRenderer(this);
+        boomerang = new Boomerang(this);
+        boomerang2 = new Boomerang(this);
         GL3 gl = drawable.getGL().getGL3();
         setShadingLevel(gl, 1);
         setLightPosition(gl, 5, 5, 3);
+        anim = new FPSAnimator(canvas, 60, true);
+        anim.start();
     }
 
 
@@ -50,7 +55,7 @@ public class MainBoomerang extends GLBase1 {
         // ------  Kamera-System  -------
 
         setCameraSystem(gl, dCam, elevation, azimut);
-        setColor(0.8f, 0.8f, 0f, 1);
+        setColor(0.8f, 0.8f, 0.8f, 1);
         setLightPosition(gl, 0, 6, 10);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
         boomerang.draw(gl);

@@ -15,16 +15,13 @@ public class OBJReader {
     public OBJReader() {
     }
 
-    ArrayList<Float> outVertexList = new ArrayList<>(20000);
-    ArrayList<Float> outNormList = new ArrayList<>(20000);
-
-    public Mesh readMesh(String _fileName) {
+    public void readMesh(String _fileName, ArrayList<Float> outVertexList, ArrayList<Float> outNormList) {
         ArrayList<Vec3> vertexList = new ArrayList<>(4000);
         ArrayList<Vec3> normList = new ArrayList<>(4000);
         outVertexList.clear();
         outNormList.clear();
         try(Scanner in = new Scanner(new File(getClass().getClassLoader().getResource(_fileName).getFile()))) {
-            in.useDelimiter(" |\n");
+            in.useDelimiter("\\s");
             String ch = "\0";
             // Wait for vertices
             while (!ch.equals("v")) {
@@ -54,7 +51,7 @@ public class OBJReader {
             // Read all faces
             int v_i;
             int n_i;
-            in.useDelimiter(" |\n|/");
+            in.useDelimiter("\\s|/");
             while (ch.equals("f")) {
                 for(int i = 0; i < 3; i++) {
                     v_i = in.nextInt();
@@ -76,7 +73,6 @@ public class OBJReader {
                 }
             }
         } catch (IOException e){ e.printStackTrace();}
-        return new Mesh(outVertexList, outNormList);
     }
 
 }

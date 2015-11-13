@@ -15,9 +15,18 @@ public class Mesh {
     MyRenderer1 renderer = null;
     ArrayList<Float> vertexList, normalList;
 
-    public Mesh(ArrayList<Float> _vertexList, ArrayList<Float> _normalList) {
+    private Mesh(MyRenderer1 _renderer, ArrayList<Float> _vertexList, ArrayList<Float> _normalList) {
+        renderer = _renderer;
         vertexList = _vertexList;
         normalList = _normalList;
+    }
+
+    public static Mesh factory(String _fileName, MyRenderer1 _renderer) {
+        ArrayList<Float> vlist = new ArrayList<>(20000);
+        ArrayList<Float> nlist = new ArrayList<>(20000);
+        OBJReader obj= new OBJReader();
+        obj.readMesh(_fileName, vlist, nlist);
+        return new Mesh(_renderer, vlist, nlist);
     }
 
     public void draw(GL3 gl) {
@@ -35,5 +44,8 @@ public class Mesh {
 
     public void setRenderer(MyRenderer1 _renderer) {
         renderer = _renderer;
+    }
+    public MyRenderer1 getRenderer() {
+        return renderer;
     }
 }

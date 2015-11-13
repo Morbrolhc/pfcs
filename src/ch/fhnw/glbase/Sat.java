@@ -30,7 +30,7 @@ public class Sat extends GLBase1 {
 
     double r2 = 26.56;
     double v2 = Math.sqrt(GM/r2);
-    Satellite sat2 = new Satellite(r2, 0, 0,v2, 0.5f);
+    Satellite sat2 = new Satellite(r2, 0, 0,v2*0.9f, 0.5f);
 
     RotKoerper rotk = new RotKoerper(this);
 
@@ -71,6 +71,10 @@ public class Sat extends GLBase1 {
         sat.draw(gl);
         rotate(gl, 55, 0, 1, 0);
         sat2.draw(gl);
+        double ekin = 0.5*sat2.vx*sat2.vx+sat2.vy*sat2.vy;
+        double r = Math.sqrt(sat2.x*sat2.x+sat2.y*sat2.y);
+        double epot = -GM / r;
+        System.out.println("E = " + (epot+ekin));
         for(int i = 0; i < 4000; i++) {
             sat.move();
             sat2.move();
