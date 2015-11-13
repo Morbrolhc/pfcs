@@ -21,7 +21,7 @@ public class OBJReader {
         outVertexList.clear();
         outNormList.clear();
         try(Scanner in = new Scanner(new File(getClass().getClassLoader().getResource(_fileName).getFile()))) {
-            in.useDelimiter("\\s");
+            in.useDelimiter(" |\r?\n");
             String ch = "\0";
             // Wait for vertices
             while (!ch.equals("v")) {
@@ -51,7 +51,7 @@ public class OBJReader {
             // Read all faces
             int v_i;
             int n_i;
-            in.useDelimiter("\\s|/");
+            in.useDelimiter(" |\r?\n|/");
             while (ch.equals("f")) {
                 for(int i = 0; i < 3; i++) {
                     v_i = in.nextInt();

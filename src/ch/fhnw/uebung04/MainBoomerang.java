@@ -1,8 +1,8 @@
 package ch.fhnw.uebung04;//  -------------   JOGL 3D-Programm  -------------------
 
 import ch.fhnw.glbase.GLBase1;
-import ch.fhnw.util.Mesh;
-import ch.fhnw.util.OBJReader;
+import ch.fhnw.util.Timer;
+import ch.fhnw.util.bodys.Ground;
 import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.media.opengl.GL3;
@@ -18,18 +18,19 @@ public class MainBoomerang extends GLBase1 {
     float bottom, top;
     float near = -10, far = 1000;
 
-    float dCam = 10;                 // Abstand vom absoluten Nullpunkt
-    float elevation = 30;            // Orientierung
+    float dCam = 20;                 // Abstand vom absoluten Nullpunkt
+    float elevation = 15;            // Orientierung
     float azimut = 20;
 
+    Timer timer = new Timer();
     Boomerang boomerang;
-    Boomerang boomerang2;
+    Ground ground;
     FPSAnimator anim;
 
     //  ---------  Methoden  ----------------------------------
 
     public MainBoomerang() {
-
+        super();
     }
 
     //  ----------  OpenGL-Events   ---------------------------
@@ -37,8 +38,10 @@ public class MainBoomerang extends GLBase1 {
     @Override
     public void init(GLAutoDrawable drawable) {
         super.init(drawable);
-        boomerang = new Boomerang(this);
-        boomerang2 = new Boomerang(this);
+        boomerang = new Boomerang(this, "daywalker.obj", 0, 15);
+        ground = new Ground(this, -20);
+        timer.addObject(boomerang);
+        new Thread(timer).start();
         GL3 gl = drawable.getGL().getGL3();
         setShadingLevel(gl, 1);
         setLightPosition(gl, 5, 5, 3);
@@ -59,6 +62,8 @@ public class MainBoomerang extends GLBase1 {
         setLightPosition(gl, 0, 6, 10);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
         boomerang.draw(gl);
+        setColor(0.1f, 1, 0.1f, 1);
+        //ground.draw(gl);
     }
 
 
@@ -85,5 +90,21 @@ public class MainBoomerang extends GLBase1 {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        switch(code) {
+            case KeyEvent.VK_D:
+                azimut++;
+                break;
+            case KeyEvent.VK_W:
+                elevation++;
+                break;
+            case KeyEvent.VK_S:
+                elevation--;
+                break;
+            case KeyEvent.VK_A:
+                azimut--;
+                break;
+        }
+        canvas.display();
     }
 }

@@ -11,25 +11,39 @@ import javax.media.opengl.GL3;
  */
 public class Boomerang implements IAnimatable {
 
-    private float phi;
+    private float alpha;
+    private float beta;
+    private float incl;
+    private float r;
+
 
     private Mesh mesh;
 
-    public Boomerang(MyRenderer1 _renderer) {
-        mesh = Mesh.factory("daywalker.obj", _renderer);
+    public Boomerang(MyRenderer1 _renderer, String model, float _incl, float _r) {
+        r = _r;
+        incl = _incl;
+        mesh = Mesh.factory(model, _renderer);
     }
 
     @Override
     public void update(double dTime) {
+        alpha += dTime * 900;
+        beta += dTime * 50;
 
+        if(alpha >= 360) alpha = 0;
+        if(beta >= 360) beta = 0;
     }
 
     @Override
     public void draw(GL3 gl) {
         MyRenderer1 renderer = mesh.getRenderer();
-        renderer.rotate(gl, 15, 1, 0, 0);
-        renderer.rotate(gl, phi+=5, 0, 1, 0);
-        renderer.scale(gl, 2f);
+        renderer.pushMatrix(gl);
+        renderer.rotate(gl, incl, 0, 0, 1);
+        renderer.rotate(gl, beta, 0, 1, 0);
+        renderer.translate(gl,r, 0, 0);
+        renderer.rotate(gl, 55, 0, 0, 1);
+        renderer.rotate(gl, alpha, 0, 1, 0);
         mesh.draw(gl);
+        renderer.popMatrix(gl);
     }
 }

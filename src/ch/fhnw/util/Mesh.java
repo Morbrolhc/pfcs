@@ -29,6 +29,10 @@ public class Mesh {
         return new Mesh(_renderer, vlist, nlist);
     }
 
+    public static Mesh factory(MyRenderer1 _renderer, ArrayList<Float> _vList, ArrayList<Float> _nList) {
+        return new Mesh(_renderer, _vList, _nList);
+    }
+
     public void draw(GL3 gl) {
         if(renderer == null) {
             return;
