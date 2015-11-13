@@ -12,7 +12,7 @@ import javax.media.opengl.GL3;
 public class Boomerang implements IAnimatable {
 
     private float alpha;
-    private float beta;
+    private float beta = (float)Math.random()*360;
     private float incl;
     private float r;
 
@@ -27,8 +27,8 @@ public class Boomerang implements IAnimatable {
 
     @Override
     public void update(double dTime) {
-        alpha += dTime * 900;
-        beta += dTime * 50;
+        alpha += dTime * 1500;
+        beta += dTime *20;
 
         if(alpha >= 360) alpha = 0;
         if(beta >= 360) beta = 0;

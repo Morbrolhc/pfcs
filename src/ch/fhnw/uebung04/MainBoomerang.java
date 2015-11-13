@@ -14,7 +14,7 @@ public class MainBoomerang extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
-    float left = -20, right = 20;
+    float left = -35, right = 35;
     float bottom, top;
     float near = -10, far = 1000;
 
@@ -24,6 +24,7 @@ public class MainBoomerang extends GLBase1 {
 
     Timer timer = new Timer();
     Boomerang boomerang;
+    Boomerang boomerang2;
     Ground ground;
     FPSAnimator anim;
 
@@ -38,9 +39,11 @@ public class MainBoomerang extends GLBase1 {
     @Override
     public void init(GLAutoDrawable drawable) {
         super.init(drawable);
-        boomerang = new Boomerang(this, "daywalker.obj", 0, 15);
+        boomerang = new Boomerang(this, "daywalker_scaled.obj", 0, 25);
+        boomerang2 = new Boomerang(this, "boomerang_scaled.obj", 10, 30);
         ground = new Ground(this, -20);
         timer.addObject(boomerang);
+        timer.addObject(boomerang2);
         new Thread(timer).start();
         GL3 gl = drawable.getGL().getGL3();
         setShadingLevel(gl, 1);
@@ -62,6 +65,7 @@ public class MainBoomerang extends GLBase1 {
         setLightPosition(gl, 0, 6, 10);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
         boomerang.draw(gl);
+        boomerang2.draw(gl);
         setColor(0.1f, 1, 0.1f, 1);
         //ground.draw(gl);
     }

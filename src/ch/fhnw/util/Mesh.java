@@ -37,7 +37,6 @@ public class Mesh {
         if(renderer == null) {
             return;
         }
-        renderer.pushMatrix(gl);
         for(int i = 0; i < vertexList.size(); i+=3) {
             renderer.setNormal(normalList.get(i), normalList.get(i+1), normalList.get(i+2));
             renderer.putVertex(vertexList.get(i), vertexList.get(i+1), vertexList.get(i+2));
