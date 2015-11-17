@@ -28,7 +28,7 @@ public class Boomerang implements IAnimatable {
     @Override
     public void update(double dTime) {
         alpha += dTime * 1500;
-        beta += dTime *20;
+        beta += dTime *30;
 
         if(alpha >= 360) alpha = 0;
         if(beta >= 360) beta = 0;

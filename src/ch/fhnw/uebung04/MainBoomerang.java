@@ -14,7 +14,7 @@ public class MainBoomerang extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
-    float left = -35, right = 35;
+    float left = -32, right = 32;
     float bottom, top;
     float near = -10, far = 1000;
 

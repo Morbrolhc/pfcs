@@ -3,6 +3,7 @@ package ch.fhnw.launcher;
 import ch.fhnw.uebung01.MainTrack;
 import ch.fhnw.uebung02.MainCar;
 import ch.fhnw.uebung03.MainStorm;
+import ch.fhnw.uebung04.MainBoomerang;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -21,8 +22,9 @@ public class Main extends JFrame {
     final private static String UEBUNG01 = "Uebung 01 - LBahn";
     final private static String UEBUNG02 = "Uebung 02 - Car";
     final private static String UEBUNG03 = "Uebung 03 - Storm";
+    final private static String UEBUNG04 = "Uebung 03 - Boomerang";
 
-    String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03};
+    String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03, UEBUNG04};
 
 
     public static void main(String[] args) {
@@ -88,6 +90,9 @@ public class Main extends JFrame {
                     break;
                 case UEBUNG03:
                     new MainStorm();
+                    break;
+                case UEBUNG04:
+                    new MainBoomerang();
                     break;
             }
         });
