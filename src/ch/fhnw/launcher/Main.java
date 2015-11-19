@@ -22,7 +22,7 @@ public class Main extends JFrame {
     final private static String UEBUNG01 = "Uebung 01 - LBahn";
     final private static String UEBUNG02 = "Uebung 02 - Car";
     final private static String UEBUNG03 = "Uebung 03 - Storm";
-    final private static String UEBUNG04 = "Uebung 03 - Boomerang";
+    final private static String UEBUNG04 = "Uebung 04 - Boomerang";
 
     String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03, UEBUNG04};
 

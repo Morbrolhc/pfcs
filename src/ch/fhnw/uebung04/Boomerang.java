@@ -38,6 +38,7 @@ public class Boomerang implements IAnimatable {
     public void draw(GL3 gl) {
         MyRenderer1 renderer = mesh.getRenderer();
         renderer.pushMatrix(gl);
+        renderer.translate(gl, 0, (float)(Math.cos(Math.toRadians(90-incl))*r), 0);
         renderer.rotate(gl, incl, 0, 0, 1);
         renderer.rotate(gl, beta, 0, 1, 0);
         renderer.translate(gl,r, 0, 0);

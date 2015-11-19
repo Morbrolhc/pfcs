@@ -16,7 +16,7 @@ public class MainBoomerang extends GLBase1 {
 
     float left = -32, right = 32;
     float bottom, top;
-    float near = -10, far = 1000;
+    float near = -20, far = 1000;
 
     float dCam = 20;                 // Abstand vom absoluten Nullpunkt
     float elevation = 15;            // Orientierung
@@ -41,11 +41,12 @@ public class MainBoomerang extends GLBase1 {
         super.init(drawable);
         boomerang = new Boomerang(this, "daywalker_scaled.obj", 0, 25);
         boomerang2 = new Boomerang(this, "boomerang_scaled.obj", 10, 30);
-        ground = new Ground(this, -20);
+        ground = new Ground(this, 30, -2);
         timer.addObject(boomerang);
         timer.addObject(boomerang2);
         new Thread(timer).start();
         GL3 gl = drawable.getGL().getGL3();
+        gl.glClearColor(0.2f, 0.2f, 1, 1);
         setShadingLevel(gl, 1);
         setLightPosition(gl, 5, 5, 3);
         anim = new FPSAnimator(canvas, 60, true);
@@ -61,13 +62,13 @@ public class MainBoomerang extends GLBase1 {
         // ------  Kamera-System  -------
 
         setCameraSystem(gl, dCam, elevation, azimut);
-        setColor(0.8f, 0.8f, 0.8f, 1);
+        setColor(1f,0f, 0f, 1);
         setLightPosition(gl, 0, 6, 10);
-        drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
+        //drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
         boomerang.draw(gl);
         boomerang2.draw(gl);
         setColor(0.1f, 1, 0.1f, 1);
-        //ground.draw(gl);
+        ground.draw(gl);
     }
 
 

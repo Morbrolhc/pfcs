@@ -3,7 +3,9 @@ package ch.fhnw.util;
 import ch.fhnw.util.math.Vec3;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +22,9 @@ public class OBJReader {
         ArrayList<Vec3> normList = new ArrayList<>(4000);
         outVertexList.clear();
         outNormList.clear();
-        try(Scanner in = new Scanner(new File(getClass().getClassLoader().getResource(_fileName).getFile()))) {
+
+        try(InputStream is = OBJReader.class.getClassLoader().getResourceAsStream(_fileName)) {
+            Scanner in = new Scanner(is);
             in.useDelimiter(" |\r?\n");
             String ch = "\0";
             // Wait for vertices
