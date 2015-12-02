@@ -41,8 +41,8 @@ public class Mesh {
             renderer.setNormal(normalList.get(i), normalList.get(i+1), normalList.get(i+2));
             renderer.putVertex(vertexList.get(i), vertexList.get(i+1), vertexList.get(i+2));
         }
-        renderer.copyBuffer(gl, vertexList.size());
-        gl.glDrawArrays(GL.GL_TRIANGLES, 0, vertexList.size());
+        renderer.copyBuffer(gl, vertexList.size()/3);
+        gl.glDrawArrays(GL.GL_TRIANGLES, 0, vertexList.size()/3);
     }
 
     public void setRenderer(MyRenderer1 _renderer) {

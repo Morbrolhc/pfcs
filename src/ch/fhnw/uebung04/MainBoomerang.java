@@ -39,8 +39,8 @@ public class MainBoomerang extends GLBase1 {
     @Override
     public void init(GLAutoDrawable drawable) {
         super.init(drawable);
-        boomerang = new Boomerang(this, "daywalker_scaled.obj", 0, 25);
         boomerang2 = new Boomerang(this, "boomerang_scaled.obj", 10, 30);
+        boomerang = new Boomerang(this, "daywalker_scaled.obj", 0, 25);
         ground = new Ground(this, 30, -2);
         timer.addObject(boomerang);
         timer.addObject(boomerang2);
@@ -65,8 +65,8 @@ public class MainBoomerang extends GLBase1 {
         setColor(1f,0f, 0f, 1);
         setLightPosition(gl, 0, 6, 10);
         //drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
-        boomerang.draw(gl);
         boomerang2.draw(gl);
+        boomerang.draw(gl);
         setColor(0.1f, 1, 0.1f, 1);
         ground.draw(gl);
     }

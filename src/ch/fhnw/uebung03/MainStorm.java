@@ -50,9 +50,9 @@ public class MainStorm extends GLBase1 {
         anim.stop();
         objects = new ArrayList<>(n);
         for(int i = 0; i < n; i++) objects.add(generateObject());
-        for(int i = 0; i < 1000; i++) {
-            for(IAnimatable a : objects) a.update(0.1);
-        }
+//        for(int i = 0; i < 1000; i++) {
+//            for(IAnimatable a : objects) a.update(0.1);
+//        }
         anim.start();
     }
 

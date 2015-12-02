@@ -27,8 +27,8 @@ public class Boomerang implements IAnimatable {
 
     @Override
     public void update(double dTime) {
-        alpha += dTime * 1500;
-        beta += dTime *30;
+        alpha += dTime * 500;
+        beta += dTime *100;
 
         if(alpha >= 360) alpha = 0;
         if(beta >= 360) beta = 0;
@@ -44,6 +44,7 @@ public class Boomerang implements IAnimatable {
         renderer.translate(gl,r, 0, 0);
         renderer.rotate(gl, 55, 0, 0, 1);
         renderer.rotate(gl, alpha, 0, 1, 0);
+        renderer.scale(gl, 5);
         mesh.draw(gl);
         renderer.popMatrix(gl);
     }

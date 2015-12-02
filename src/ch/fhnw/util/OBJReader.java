@@ -17,11 +17,11 @@ public class OBJReader {
     public OBJReader() {
     }
 
-    public void readMesh(String _fileName, ArrayList<Float> outVertexList, ArrayList<Float> outNormList) {
+    public void readMesh(String _fileName, ArrayList<Float> _outVertexList, ArrayList<Float> _outNormList) {
         ArrayList<Vec3> vertexList = new ArrayList<>(4000);
         ArrayList<Vec3> normList = new ArrayList<>(4000);
-        outVertexList.clear();
-        outNormList.clear();
+        _outVertexList.clear();
+        _outNormList.clear();
 
         try(InputStream is = OBJReader.class.getClassLoader().getResourceAsStream(_fileName)) {
             Scanner in = new Scanner(is);
@@ -63,12 +63,12 @@ public class OBJReader {
                     n_i = in.nextInt();
                     Vec3 v = vertexList.get(v_i-1);
                     Vec3 n = normList.get(n_i-1);
-                    outVertexList.add(v.x);
-                    outVertexList.add(v.y);
-                    outVertexList.add(v.z);
-                    outNormList.add(n.x);
-                    outNormList.add(n.y);
-                    outNormList.add(n.z);
+                    _outVertexList.add(v.x);
+                    _outVertexList.add(v.y);
+                    _outVertexList.add(v.z);
+                    _outNormList.add(n.x);
+                    _outNormList.add(n.y);
+                    _outNormList.add(n.z);
                 }
                 if(in.hasNext()){
                     ch = in.next();
