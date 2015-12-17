@@ -50,9 +50,9 @@ public class MainStorm extends GLBase1 {
         anim.stop();
         objects = new ArrayList<>(n);
         for(int i = 0; i < n; i++) objects.add(generateObject());
-//        for(int i = 0; i < 1000; i++) {
-//            for(IAnimatable a : objects) a.update(0.1);
-//        }
+        for(int i = 0; i < 1000; i++) {
+            for(IAnimatable a : objects) a.update(0.1);
+        }
         anim.start();
     }
 
@@ -92,7 +92,10 @@ public class MainStorm extends GLBase1 {
         setColor(0.8f, 0.8f, 0f, 1);
         setLightPosition(gl, 0, 6, 10);
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
+        rewindBuffer(gl);
         for(IAnimatable a : objects) a.draw(gl);
+//        copyBuffer(gl, objects.size()*36);
+//        gl.glDrawArrays(GL3.GL_TRIANGLES, 0, objects.size()*36);
     }
 
 

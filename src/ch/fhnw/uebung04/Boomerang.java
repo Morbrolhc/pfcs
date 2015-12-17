@@ -27,8 +27,8 @@ public class Boomerang implements IAnimatable {
 
     @Override
     public void update(double dTime) {
-        alpha += dTime * 500;
-        beta += dTime *100;
+        alpha += dTime * 1200;
+        beta += dTime *80;
 
         if(alpha >= 360) alpha = 0;
         if(beta >= 360) beta = 0;
@@ -38,13 +38,12 @@ public class Boomerang implements IAnimatable {
     public void draw(GL3 gl) {
         MyRenderer1 renderer = mesh.getRenderer();
         renderer.pushMatrix(gl);
-        renderer.translate(gl, 0, (float)(Math.cos(Math.toRadians(90-incl))*r), 0);
-        renderer.rotate(gl, incl, 0, 0, 1);
-        renderer.rotate(gl, beta, 0, 1, 0);
-        renderer.translate(gl,r, 0, 0);
-        renderer.rotate(gl, 55, 0, 0, 1);
-        renderer.rotate(gl, alpha, 0, 1, 0);
-        renderer.scale(gl, 5);
+        renderer.translate(gl, 0, (float)(Math.cos(Math.toRadians(90-incl))*r), 0);  //Bahnhöhe anpassen 
+        renderer.rotate(gl, incl, 0, 0, 1);  //Bahn anwinkeln
+        renderer.rotate(gl, beta, 0, 1, 0);   //Körper auf Bahne rotieren
+        renderer.translate(gl,r, 0, 0);    //Körper auf die Bahn verschieben
+        renderer.rotate(gl, 55, 0, 0, 1);  //Körper anstellen
+        renderer.rotate(gl, alpha, 0, 1, 0); //Körper rotieren
         mesh.draw(gl);
         renderer.popMatrix(gl);
     }

@@ -79,6 +79,7 @@ public class Main extends JFrame {
 
         JButton button = new JButton("Select");
         button.addActionListener(l -> {
+            button.setEnabled(false);
             String result = (String)comboBox.getSelectedItem();
             if( result == null ) System.exit(0);
             switch (result) {
@@ -95,6 +96,7 @@ public class Main extends JFrame {
                     new MainBoomerang();
                     break;
             }
+            dispose();
         });
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridy++;
