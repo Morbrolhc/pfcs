@@ -24,8 +24,7 @@ public class MainFlow extends GLBase1 {
     float near = -20, far = 100;
 
     Circle circle = new Circle(this, 0.2f, 40, 0, 0);
-    FlowLine[] lines = {new FlowLine(this, -0.4, R), new FlowLine(this, -0.3, R), new FlowLine(this, -0.2, R), new FlowLine(this, -0.1, R),
-            new FlowLine(this, 0.1, R), new FlowLine(this, 0.2, R), new FlowLine(this, 0.3, R), new FlowLine(this, 0.4, R)};
+    FlowLine lines = new FlowLine(this, R);
     Timer timer = new Timer();
     FPSAnimator animator;
 
@@ -46,9 +45,7 @@ public class MainFlow extends GLBase1 {
         animator = new FPSAnimator(canvas, 60, true);
         animator.start();
 
-        for (FlowLine line : lines) {
-            timer.addObject(line);
-        }
+            timer.addObject(lines);
         new Thread(timer).start();
 
     }
@@ -64,9 +61,7 @@ public class MainFlow extends GLBase1 {
         setColor(0.15f, 0.15f, 0.15f, 1);
         circle.draw(gl);
 
-        for (FlowLine line : lines) {
-            line.draw(gl);
-        }
+        lines.draw(gl);
     }
 
 
@@ -90,22 +85,16 @@ public class MainFlow extends GLBase1 {
         int code = e.getKeyCode();
         switch(code) {
             case KeyEvent.VK_1:
-                for (FlowLine line : lines) {
-                    line.setCirculation(false);
-                    line.setIdeal(true);
-                }
+                lines.setCirculation(false);
+                lines.setIdeal(true);
                 break;
             case KeyEvent.VK_2:
-                for (FlowLine line : lines) {
-                    line.setCirculation(true);
-                    line.setIdeal(false);
-                }
+                lines.setCirculation(true);
+                lines.setIdeal(false);
                 break;
             case KeyEvent.VK_3:
-                for (FlowLine line : lines) {
-                    line.setCirculation(true);
-                    line.setIdeal(true);
-                }
+                lines.setCirculation(true);
+                lines.setIdeal(true);
                 break;
         }
     }
