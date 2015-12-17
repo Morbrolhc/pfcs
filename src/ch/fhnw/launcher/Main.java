@@ -4,6 +4,7 @@ import ch.fhnw.uebung01.MainTrack;
 import ch.fhnw.uebung02.MainCar;
 import ch.fhnw.uebung03.MainStorm;
 import ch.fhnw.uebung04.MainBoomerang;
+import ch.fhnw.uebung05.MainFlow;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,8 +24,9 @@ public class Main extends JFrame {
     final private static String UEBUNG02 = "Uebung 02 - Car";
     final private static String UEBUNG03 = "Uebung 03 - Storm";
     final private static String UEBUNG04 = "Uebung 04 - Boomerang";
+    final private static String UEBUNG05 = "Uebung 05 - Flow Sim";
 
-    String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03, UEBUNG04};
+    String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03, UEBUNG04, UEBUNG05};
 
 
     public static void main(String[] args) {
@@ -94,6 +96,9 @@ public class Main extends JFrame {
                     break;
                 case UEBUNG04:
                     new MainBoomerang();
+                    break;
+                case UEBUNG05:
+                    new MainFlow();
                     break;
             }
             dispose();
