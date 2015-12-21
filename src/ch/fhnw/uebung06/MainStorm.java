@@ -1,9 +1,10 @@
-package ch.fhnw.uebung03;//  -------------   JOGL 3D-Programm  -------------------
+package ch.fhnw.uebung06;//  -------------   JOGL 3D-Programm  -------------------
 
 import ch.fhnw.glbase.GLBase1;
 import ch.fhnw.util.Timer;
 import ch.fhnw.util.bodys.Cuboid;
 import ch.fhnw.util.bodys.FlyingCube;
+import ch.fhnw.util.bodys.FlyingCuboid;
 import ch.fhnw.util.properties.IAnimatable;
 import com.jogamp.opengl.util.FPSAnimator;
 
@@ -30,41 +31,23 @@ public class MainStorm extends GLBase1 {
     boolean fullscreen = false;
     Timer timer;
     FPSAnimator anim = new FPSAnimator(canvas, 60, true);
-    List<IAnimatable> objects;
+    List<IAnimatable> objects = new ArrayList<>();
     Menu menu;
-    Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f, 1, 1, 0);
+    Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f, 1, 1, 1);
 
     //  ---------  Methoden  ----------------------------------
 
     public MainStorm() {
         super();
-        regenerateObjects(1000);
         menu = new Menu(this);
+        objects.add(new FlyingCuboid(cub, 1));
         timer = new Timer(objects);
         new Thread(timer).start();
-        System.out.printf(" " + Math.abs(Integer.MIN_VALUE));
     }
 
-    public void regenerateObjects(int n) {
-        anim.stop();
-        objects = new ArrayList<>(n);
-        for(int i = 0; i < n; i++) objects.add(generateObject());
-        for(int i = 0; i < 1000; i++) {
-            for(IAnimatable a : objects) a.update(0.1);
-        }
-        anim.start();
-    }
 
     public Cuboid getCuboid() {
         return cub;
-    }
-
-    public FlyingCube generateObject() {
-
-        return new FlyingCube(cub, (float)Math.random()*10 + 1,
-                ((float)Math.random()-0.5f)*4, ((float)Math.random()-0.5f)*4, -100,
-                ((float)Math.random()-0.5f), ((float)Math.random()-0.5f), ((float)Math.random()-0.5f),
-                (float)Math.random()*10);
     }
 
     //  ----------  OpenGL-Events   ---------------------------
@@ -93,8 +76,6 @@ public class MainStorm extends GLBase1 {
         drawAxis(gl, 8, 8, 8);             //  Koordinatenachsen
         rewindBuffer(gl);
         for(IAnimatable a : objects) a.draw(gl);
-//        copyBuffer(gl, objects.size()*36);
-//        gl.glDrawArrays(GL3.GL_TRIANGLES, 0, objects.size()*36);
     }
 
 
@@ -117,30 +98,6 @@ public class MainStorm extends GLBase1 {
 
     public static void main(String[] args) {
         new MainStorm();
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
-        switch(code) {
-            case KeyEvent.VK_F11:
-                if(!fullscreen) {
-                    f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                    f.dispose();
-                    f.setUndecorated(true);
-                    f.setVisible(true);
-                    canvas.requestFocus();
-                    fullscreen = true;
-                } else {
-                    f.dispose();
-                    f.setUndecorated(false);
-                    f.setVisible(true);
-                    canvas.requestFocus();
-                    fullscreen = false;
-                }
-                break;
-        }
-        canvas.display();
     }
 
     @Override

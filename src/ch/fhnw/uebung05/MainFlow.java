@@ -96,6 +96,9 @@ public class MainFlow extends GLBase1 {
                 lines.setCirculation(true);
                 lines.setIdeal(true);
                 break;
+            case KeyEvent.VK_4:
+                lines.setRandom();
+                break;
         }
     }
 

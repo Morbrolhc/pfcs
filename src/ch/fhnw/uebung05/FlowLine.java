@@ -14,7 +14,7 @@ public class FlowLine implements IAnimatable {
 
     MyRenderer1 renderer;
     ConcurrentLinkedDeque<double[]> list = new ConcurrentLinkedDeque<>();
-    boolean circulation = false, ideal = true;
+    boolean circulation = false, ideal = true, random = false;
     IdealFlow iFLow;
     CirculationFlow cFlow;
 
@@ -25,8 +25,14 @@ public class FlowLine implements IAnimatable {
     }
 
     private void addPoints() {
-        for(float f = -0.45f; f < 0.48; f += 0.1f) {
-            list.add(new double[]{-1, f});
+        if(!random) {
+            for(float f = -0.45f; f < 0.48; f += 0.1f) {
+                list.add(new double[]{-1, f});
+            }
+        } else {
+            for (int i = 0; i < 6; i++) {
+                list.add(new double[]{-1, Math.random() - 0.5});
+            }
         }
     }
 
@@ -66,4 +72,6 @@ public class FlowLine implements IAnimatable {
     public void setIdeal(boolean ideal) {
         this.ideal = ideal;
     }
+
+    public void setRandom() { random = !random;}
 }

@@ -67,7 +67,6 @@ public class Cuboid {
 
 //------ Getter & Setter ----------
 
-
     public void setA(float a) {
         this.a = a;
     }

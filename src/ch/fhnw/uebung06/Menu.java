@@ -1,6 +1,7 @@
-package ch.fhnw.uebung03;
+package ch.fhnw.uebung06;
 
 import ch.fhnw.util.bodys.FlyingCube;
+import ch.fhnw.util.bodys.FlyingCuboid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +44,7 @@ public class Menu extends JFrame {
         speedSlider.addChangeListener(e -> {
             float val = ((JSlider) e.getSource()).getValue();
             val /= 100;
-            FlyingCube.SPEED = val;
+            FlyingCuboid.SPEED = val;
         });
         Hashtable labelTable = new Hashtable();
         labelTable.put(0, new JLabel("0x"));
