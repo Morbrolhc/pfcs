@@ -3,20 +3,17 @@ package ch.fhnw.uebung06;//  -------------   JOGL 3D-Programm  -----------------
 import ch.fhnw.glbase.GLBase1;
 import ch.fhnw.util.Timer;
 import ch.fhnw.util.bodys.Cuboid;
-import ch.fhnw.util.bodys.FlyingCube;
 import ch.fhnw.util.bodys.FlyingCuboid;
 import ch.fhnw.util.properties.IAnimatable;
 import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.media.opengl.GL3;
 import javax.media.opengl.GLAutoDrawable;
-import javax.swing.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainStorm extends GLBase1 {
+public class MainQuboid extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
@@ -33,11 +30,11 @@ public class MainStorm extends GLBase1 {
     FPSAnimator anim = new FPSAnimator(canvas, 60, true);
     List<IAnimatable> objects = new ArrayList<>();
     Menu menu;
-    Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f, 1, 1, 1);
+    Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f, 1, 1, 0);
 
     //  ---------  Methoden  ----------------------------------
 
-    public MainStorm() {
+    public MainQuboid() {
         super();
         menu = new Menu(this);
         objects.add(new FlyingCuboid(cub, 1));
@@ -97,7 +94,7 @@ public class MainStorm extends GLBase1 {
     //  -----------  main-Methode  ---------------------------
 
     public static void main(String[] args) {
-        new MainStorm();
+        new MainQuboid();
     }
 
     @Override

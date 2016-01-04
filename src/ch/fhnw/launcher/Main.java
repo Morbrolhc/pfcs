@@ -5,6 +5,7 @@ import ch.fhnw.uebung02.MainCar;
 import ch.fhnw.uebung03.MainStorm;
 import ch.fhnw.uebung04.MainBoomerang;
 import ch.fhnw.uebung05.MainFlow;
+import ch.fhnw.uebung06.MainQuboid;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,8 +26,9 @@ public class Main extends JFrame {
     final private static String UEBUNG03 = "Uebung 03 - Storm";
     final private static String UEBUNG04 = "Uebung 04 - Boomerang";
     final private static String UEBUNG05 = "Uebung 05 - Flow Sim";
+    final private static String UEBUNG06 = "Uebung 06 - Flying Quboid";
 
-    String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03, UEBUNG04, UEBUNG05};
+    String[] options = new String[] {UEBUNG01, UEBUNG02, UEBUNG03, UEBUNG04, UEBUNG05, UEBUNG06};
 
 
     public static void main(String[] args) {
@@ -99,6 +101,9 @@ public class Main extends JFrame {
                     break;
                 case UEBUNG05:
                     new MainFlow();
+                    break;
+                case UEBUNG06:
+                    new MainQuboid();
                     break;
             }
             dispose();

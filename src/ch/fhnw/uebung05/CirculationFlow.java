@@ -14,10 +14,10 @@ public class CirculationFlow extends Dynamic {
     }
     @Override
     public double[] f(double[] x) {
-        double[] ret = new double[2];
         double q = x[0]*x[0]+x[1]*x[1];
-        ret[0] = -x[1]/q;
-        ret[1] = x[0]/q;
-        return ret;
+        return new double[]{
+                w / q * x[1],
+                -w / q * x[0]
+        };
     }
 }

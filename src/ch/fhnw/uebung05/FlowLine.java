@@ -48,7 +48,7 @@ public class FlowLine implements IAnimatable {
             }
             if(circulation) {
                 double[] q = cFlow.runge(p, dTime);
-                p[0] = q[0]; p[1] = p[1];
+                p[0] = q[0]; p[1] = q[1];
             }
         }
     }

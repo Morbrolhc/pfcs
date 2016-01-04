@@ -12,10 +12,10 @@ import java.util.Hashtable;
  */
 public class Menu extends JFrame {
 
-    MainStorm caller;
+    MainQuboid caller;
     float r = 1, g = 1, b = 0;
 
-    public Menu(MainStorm caller) {
+    public Menu(MainQuboid caller) {
         super();
         this.caller = caller;
         draw();
