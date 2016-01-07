@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainQuboid extends GLBase1 {
+public class MainCuboid extends GLBase1 {
 
     //  ---------  globale Daten  ---------------------------
 
@@ -25,26 +25,37 @@ public class MainQuboid extends GLBase1 {
     float elevation = 0;            // Orientierung
     float azimut = 0;
 
-    boolean fullscreen = false;
-    Timer timer;
+    Timer timer = new Timer();
     FPSAnimator anim = new FPSAnimator(canvas, 60, true);
-    List<IAnimatable> objects = new ArrayList<>();
+    List<FlyingCuboid> objects = new ArrayList<>();
     Menu menu;
-    Cuboid cub = new Cuboid(this, 0.02f, 0.02f, 0.02f, 1, 1, 0);
 
     //  ---------  Methoden  ----------------------------------
 
-    public MainQuboid() {
+    public MainCuboid() {
         super();
         menu = new Menu(this);
-        objects.add(new FlyingCuboid(cub, 1));
-        timer = new Timer(objects);
+        generateCuboids();
+        process();
         new Thread(timer).start();
     }
 
+    private void generateCuboids() {
+        for(int i = 0; i < 100; i++) {
+            FlyingCuboid obj = new FlyingCuboid(this)   ;
+            objects.add(obj);
+            timer.addObject(obj);
+        }
+    }
 
-    public Cuboid getCuboid() {
-        return cub;
+    private void process() {
+        for (int i = 0; i < 1000; i++){
+            objects.forEach(o -> o.update(0.1));
+        }
+    }
+
+    public void setColor(float r, float g, float b) {
+        objects.forEach(o -> o.setColor(r, g, b));
     }
 
     //  ----------  OpenGL-Events   ---------------------------
@@ -54,7 +65,7 @@ public class MainQuboid extends GLBase1 {
         super.init(drawable);
         GL3 gl = drawable.getGL().getGL3();
         setShadingLevel(gl, 1);
-        setLightPosition(gl, 5, 5, 0);
+        setLightPosition(gl, 0, 0, 0);
         gl.glClearColor(0, 0, 0, 1);
         anim.start();
     }
@@ -94,7 +105,7 @@ public class MainQuboid extends GLBase1 {
     //  -----------  main-Methode  ---------------------------
 
     public static void main(String[] args) {
-        new MainQuboid();
+        new MainCuboid();
     }
 
     @Override

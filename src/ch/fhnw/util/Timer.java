@@ -4,6 +4,7 @@ import ch.fhnw.uebung01.MainTrack;
 import ch.fhnw.util.properties.IAnimatable;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,11 +18,6 @@ public class Timer implements Runnable{
 
     public Timer() {
         objects = new ArrayList<>();
-        oldTime = System.nanoTime();
-    }
-
-    public Timer(List<IAnimatable> objects) {
-        this.objects = objects;
         oldTime = System.nanoTime();
     }
 

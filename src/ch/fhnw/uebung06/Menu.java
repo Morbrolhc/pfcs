@@ -12,10 +12,10 @@ import java.util.Hashtable;
  */
 public class Menu extends JFrame {
 
-    MainQuboid caller;
+    MainCuboid caller;
     float r = 1, g = 1, b = 0;
 
-    public Menu(MainQuboid caller) {
+    public Menu(MainCuboid caller) {
         super();
         this.caller = caller;
         draw();
@@ -75,7 +75,7 @@ public class Menu extends JFrame {
         JSlider redSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);
         redSlider.addChangeListener(e -> {
             r = ((JSlider)e.getSource()).getValue()/255f;
-            caller.getCuboid().setColor(r, g, b);
+            caller.setColor(r, g, b);
         });
         Hashtable redTable = new Hashtable();
         redTable.put(0, new JLabel("R"));
@@ -90,7 +90,7 @@ public class Menu extends JFrame {
         JSlider greenSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);
         greenSlider.addChangeListener(e -> {
             g = ((JSlider) e.getSource()).getValue() / 255f;
-            caller.getCuboid().setColor(r, g, b);
+            caller.setColor(r, g, b);
         });
         Hashtable greenTable = new Hashtable();
         greenTable.put(0, new JLabel("G"));
@@ -104,7 +104,7 @@ public class Menu extends JFrame {
         JSlider blueSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
         blueSlider.addChangeListener(e -> {
             b = ((JSlider) e.getSource()).getValue() / 255f;
-            caller.getCuboid().setColor(r, g, b);
+            caller.setColor(r, g, b);
         });
         Hashtable blueTable = new Hashtable();
         blueTable.put(0, new JLabel("B"));

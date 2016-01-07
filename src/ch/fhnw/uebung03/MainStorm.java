@@ -28,7 +28,7 @@ public class MainStorm extends GLBase1 {
     float azimut = 0;
 
     boolean fullscreen = false;
-    Timer timer;
+    Timer timer = new Timer();
     FPSAnimator anim = new FPSAnimator(canvas, 60, true);
     List<IAnimatable> objects;
     Menu menu;
@@ -40,7 +40,6 @@ public class MainStorm extends GLBase1 {
         super();
         regenerateObjects(1000);
         menu = new Menu(this);
-        timer = new Timer(objects);
         new Thread(timer).start();
         System.out.printf(" " + Math.abs(Integer.MIN_VALUE));
     }
@@ -48,7 +47,11 @@ public class MainStorm extends GLBase1 {
     public void regenerateObjects(int n) {
         anim.stop();
         objects = new ArrayList<>(n);
-        for(int i = 0; i < n; i++) objects.add(generateObject());
+        for(int i = 0; i < n; i++){
+            FlyingCube obj = generateObject();
+            objects.add(obj);
+            timer.addObject(obj);
+        }
         for(int i = 0; i < 1000; i++) {
             for(IAnimatable a : objects) a.update(0.1);
         }

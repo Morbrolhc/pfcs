@@ -5,16 +5,10 @@ import ch.fhnw.uebung02.MainCar;
 import ch.fhnw.uebung03.MainStorm;
 import ch.fhnw.uebung04.MainBoomerang;
 import ch.fhnw.uebung05.MainFlow;
-import ch.fhnw.uebung06.MainQuboid;
+import ch.fhnw.uebung06.MainCuboid;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * Created by joel on 28.10.15.
@@ -103,7 +97,7 @@ public class Main extends JFrame {
                     new MainFlow();
                     break;
                 case UEBUNG06:
-                    new MainQuboid();
+                    new MainCuboid();
                     break;
             }
             dispose();
