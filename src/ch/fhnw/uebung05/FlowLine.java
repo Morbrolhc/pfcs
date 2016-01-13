@@ -26,12 +26,12 @@ public class FlowLine implements IAnimatable {
 
     private void addPoints() {
         if(!random) {
-            for(float f = -0.45f; f < 0.48; f += 0.1f) {
-                list.add(new double[]{-1, f});
+            for(float f = -0.45f; f < 0.48; f += 0.08f) {
+                list.add(new double[]{-1, f });
             }
         } else {
-            for (int i = 0; i < 6; i++) {
-                list.add(new double[]{-1, Math.random() - 0.5});
+            for (int i = 0; i < 40; i++) {
+                list.add(new double[]{-1, (Math.random() - 0.5) * 1.4f});
             }
         }
     }

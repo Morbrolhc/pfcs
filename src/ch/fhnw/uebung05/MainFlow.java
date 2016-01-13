@@ -45,7 +45,7 @@ public class MainFlow extends GLBase1 {
         animator = new FPSAnimator(canvas, 60, true);
         animator.start();
 
-            timer.addObject(lines);
+        timer.addObject(lines);
         new Thread(timer).start();
 
     }
